@@ -24,11 +24,11 @@ export default defineComponent({});
 
 
 <style lang="scss" scoped>
-@use '../assets/styles/_variables.scss' as variables;
+@use '../assets/styles/_variables.scss' as *;
 
 body {
     margin: 0;
-    background-color: #000537;
+    background-color: $fondo;
 }
 
 .nav-bar {

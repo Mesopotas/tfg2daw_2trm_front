@@ -1,112 +1,156 @@
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({});
+</script>
+
 <template>
-    <div class="film">
-      <div class="film__columns">
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
+  <div class="film">
+
+    <div class="film__columns">
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <div class="film____content-title"><h2 class="film__title">Romance film Shit Nigga</h2></div>
       </div>
-      <div class="film__columns">
-  
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
-        <div class="film__card">
-          <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
-          <h2 class="film__title">FILM NAME</h2>
-        </div>
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <h2 class="film__title">Romance film Shit Nigga</h2>
       </div>
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <h2 class="film__title">Romance film Shit Nigga</h2>
       </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "Card",
-  };
-  </script>
-  
-  <style lang="scss" scoped>
-  @use '../assets/styles/_variables.scss' as variables;
-  
-  @import "./../assets/styles/main.scss";
-  
-  
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <h2 class="film__title">Romance film Shit Nigga </h2>
+      </div>
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <h2 class="film__title">Romance film Shit Nigga </h2>
+      </div>
+      <div class="film__card">
+        <img class="film__image" src="https://fakeimg.pl/200x300" alt="Film" />
+        <h2 class="film__title">Romance film Shit Nigga </h2>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@use '../assets/styles/_variables.scss' as *;
+
+@media (min-width: 900px) {
   .film {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    display: flex;
+    justify-content: center;
     background-color: #000537;
     padding: 20px;
     text-align: center;
-  
+
     &__columns {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 20px;
+      max-width: 800px;
     }
+
     &__card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      grid-template-columns: repeat(3, 1fr);
-  
+      width: 180px; 
     }
-  
+
     &__image {
-      width: 300px; // dimensiones
-      height: 90%;
+      width: 100%;
+      height: 300px;
       background-color: #ccc;
     }
-  
+
     &__title {
-      margin-top: 18px;
-      padding-top: 10px;
-      font-size: 2em;
+      margin-top: 10px;
+      font-size: 16px;
       color: white;
+      text-align: center;
     }
   }
-    @media (max-width: 1024px) {
-      .film {
-        grid-template-columns: repeat(2, 1fr);
-      }
+}
+
+
+@media (min-width: 500px) and (max-width: 899px) {
+  .film {
+    display: flex;
+    justify-content: center;
+    background-color: #000537;
+    padding: 20px;
+    text-align: center;
+
+    &__columns {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 20px;
+      max-width: 800px;
     }
-  
-    @media (max-width: 768px) {
-      
-      .film {
-        align-items: center;
-        width: 100%;
-        grid-template-columns: repeat(1, 1fr);
-  
-      
-      &__image {
-      width: 65%;
-      height: auto;
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 180px; 
     }
-  
-      &__section {
-        flex-direction: column;
-      }
+
+    &__image {
+      width: 100%;
+      height: 300px;
+      background-color: #ccc;
     }
+
+    &__title {
+      margin-top: 10px;
+      font-size: 16px;
+      color: white;
+      text-align: center;
     }
-  
-  </style>
+  }
+}
+
+@media (max-width: 499px) {
+  .film {
+    display: flex;
+    justify-content: center;
+    background-color: #000537;
+    padding: 20px;
+    text-align: center;
+
+    &__columns {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr); 
+      gap: 20px;
+      max-width: 800px;
+    }
+
+    &__card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 180px; 
+    }
+
+    &__image {
+      width: 100%;
+      height: 300px;
+      background-color: #ccc;
+    }
+
+    &__title {
+      margin-top: 10px;
+      font-size: 16px;
+      color: white;
+      text-align: center;
+    }
+  }
+}
+
+
+
+</style>

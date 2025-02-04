@@ -1,11 +1,13 @@
 <script lang="ts">
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
+import Card from './components/Card.vue';
 
 export default {
   components: {
     Header,
     Footer,
+    Card,
   },
 };
 </script>
@@ -15,9 +17,7 @@ export default {
 <template>
   <div class="layout">
     <Header />
-
-    <main class="content" />
-
+    <Card />
     <Footer />
   </div>
 </template>
