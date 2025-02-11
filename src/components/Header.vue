@@ -5,18 +5,18 @@ export default defineComponent({});
 </script>
 
 
+
+
 <template>
     <header class="nav-bar">
         <div class="nav-bar__container">
-            <div class="nav-bar__logo">VIETA</div>
-            <nav class="nav-bar__links">
-                <a href="#" class="nav-bar__link">Cartelera</a>
-                <a href="#" class="nav-bar__link">Experiencias</a>
-                <a href="#" class="nav-bar__link">Membresía</a>
-                <a href="#" class="nav-bar__link">Contacto</a>
-                <a href="#" class="nav-bar__link nav-bar__link--login">Log in</a>
-                <a href="#" class="nav-bar__link">Trabajadores</a>
+            <h1 class="nav-bar__logo">La Oficina</h1>
+            <nav class="nav-bar__menu">
+                <a href="#" class="nav-bar__link">Espacios</a>
+                <a href="#" class="nav-bar__link">Quienes Somos</a>
+                <a href="#" class="nav-bar__link">Tarifas</a>
             </nav>
+            <div class="nav-bar__circle"></div>
         </div>
     </header>
 </template>
@@ -24,50 +24,99 @@ export default defineComponent({});
 
 
 <style lang="scss" scoped>
-@use '../assets/styles/_variables.scss' as *;
 
-body {
-    margin: 0;
-    background-color: $fondo;
-}
 
 .nav-bar {
-    background-color: #000537;
-    padding: 20px 0;
+    background-color: #3B2A29;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &__container {
         display: flex;
-        justify-content: center;
         align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        position: relative;
     }
 
     &__logo {
-        font-family: 'Jaro', sans-serif;
-        color: white;
-        font-size: 28px;
+        position: absolute;
+        left: 10px;
+        color: #FFFFFF;
+        font-size: 18px;
         font-weight: bold;
-        margin-right: 40px;
     }
 
-    &__links {
+    &__menu {
         display: flex;
-        gap: 30px;
-        font-family: 'Jaldi', sans-serif;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
     }
 
     &__link {
-        color: white;
+        color: #FFFFFF;
         text-decoration: none;
-        font-size: 20px;
-        font-weight: 500;
+        font-size: 14px;
+    }
 
-        &--login {
-            margin-left: 40px;
+    &__circle {
+        position: absolute;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        background-color: #D3D3D3;
+        border-radius: 50%;
+    }
+
+    @media (min-width: 768px) {
+        padding: 20px 40px;
+
+        &__menu {
+            flex-direction: row;
+            justify-content: center;
+            gap: 20px;
         }
 
-        &:hover {
-            text-decoration: underline;
+        &__link {
+            font-size: 16px;
+        }
+
+        &__circle {
+            width: 35px;
+            height: 35px;
         }
     }
+}
+
+@media (min-width: 1024px) {
+    .nav-bar {
+    padding: 20px 80px 20px 20px;
+
+    &__container {
+        width: 90%;
+    }
+
+    &__logo {
+        font-size: 20px;
+    }
+
+    &__menu {
+        gap: 40px;
+    }
+
+    &__link {
+        font-size: 18px;
+    }
+
+    &__circle {
+        width: 40px;
+        height: 40px;
+    }
+}
 }
 </style>

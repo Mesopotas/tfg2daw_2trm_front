@@ -13,8 +13,7 @@ export default {
 <template>
   <div class="layout">
     <Header />
-    <router-view />
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
