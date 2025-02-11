@@ -1,28 +1,22 @@
 <script lang="ts">
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import Card from './components/Card.vue';
 
 export default {
   components: {
     Header,
     Footer,
-    Card,
   },
 };
 </script>
 
-
-
 <template>
   <div class="layout">
     <Header />
-    <Card />
+    <router-view />
     <Footer />
   </div>
 </template>
-
-
 
 <style lang="scss">
 .layout {
