@@ -13,7 +13,7 @@ export default {
 <template>
   <div class="layout">
     <Header />
-    <!-- <Footer /> -->
+    <Footer />
   </div>
 </template>
 

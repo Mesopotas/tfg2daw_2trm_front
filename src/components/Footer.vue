@@ -6,11 +6,9 @@ export default defineComponent({});
 
 
 <template>
+  <br><br><br><br>
   <footer class="footer">
     <div class="footer__container">
-      <div class="footer__container--logo">
-        <img src="../assets/imgs/placeholderCircle.png" alt="">
-      </div>
       <div class="footer__container--content">
         <ul class="footer__list">
           <li class="footer__item"><a href="#" class="footer__link">Cookie Policy</a></li>
@@ -21,39 +19,34 @@ export default defineComponent({});
       </div>
     </div>
   </footer>
-
 </template>
 
-
 <style lang="scss" scoped>
+
+@use '../assets/styles/_variables.scss' as *;
+
 .footer {
-  background-color: #00085A;
+  background-color: $primary-color;
   padding: 20px 0;
   color: white;
+
 
   &__container {
     display: flex;
     justify-content: center;
-    gap: 50px;
     text-align: left;
 
-    &--content{
+    &--content {
       margin-left: 30px;
     }
-
-    &--logo {
-      margin-right: 30px;
-
-      img {
-        max-width: 140px;
-      }
-    }
-
   }
 
   &__list {
-    list-style-type: disc;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 15px 50px;
     padding: 0;
+    list-style-type: disc;
   }
 
   &__item {

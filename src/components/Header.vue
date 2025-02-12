@@ -25,9 +25,10 @@ export default defineComponent({});
 
 <style lang="scss" scoped>
 
+@use '../assets/styles/_variables.scss' as *;
 
 .nav-bar {
-    background-color: #3B2A29;
+    background-color: $primary-color;
     padding: 20px;
     width: 100%;
     display: flex;
