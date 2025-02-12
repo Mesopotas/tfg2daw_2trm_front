@@ -6,7 +6,6 @@ export default defineComponent({});
 
 
 <template>
-  <br><br><br><br>
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__container--content">
