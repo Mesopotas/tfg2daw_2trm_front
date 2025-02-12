@@ -19,7 +19,7 @@
   <style lang="scss" scoped>
   .login {
     width: 100vw;
-    height: calc(100vh - 67px); /* Resta la altura del header */
+    height: calc(100vh - 67px); /* Es el total de la pantalla, menos el espacio del header (67px) */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,11 +34,11 @@
   
     &__row {
       display: flex;
-      gap: 40px; /* Espacio entre los inputs */
+      gap: 40px; 
     }
   
     &__input {
-      width: 220px; /* Para inputs en columnas */
+      width: 220px; 
       border: none;
       border-bottom: 1px solid #4A3F35;
       background: transparent;
@@ -48,7 +48,7 @@
       color: #4A3F35;
   
       &--full {
-        width: 100%; /* La contraseña ocupa todo el ancho */
+        width: 100%; 
         max-width: 500px;
       }
   
