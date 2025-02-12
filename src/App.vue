@@ -2,12 +2,18 @@
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
 import Login from './views/LoginView.vue';
+import SobreNosotros from './views/Sobre-Nosotros.vue';
+import Tarifas from './views/Tarifas.vue';
+import Oficina from './views/Oficina.vue';
 
 export default {
   components: {
     Header,
     Footer,
     Login,
+    Oficina,
+    SobreNosotros,
+    Tarifas,
   },
 };
 </script>
@@ -15,6 +21,9 @@ export default {
 <template>
   <div class="layout">
     <Header />
+    <Oficina />
+    <SobreNosotros />
+    <Tarifas />
     <Footer />
   </div>
 </template>
