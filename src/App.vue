@@ -15,7 +15,7 @@ export default {
 <template>
   <div class="layout">
     <Header />
-    <Login />
+    <Footer />
   </div>
 </template>
 
