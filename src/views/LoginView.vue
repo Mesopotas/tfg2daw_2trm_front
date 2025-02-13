@@ -17,11 +17,11 @@
 
 
 <style lang="scss" scoped>
-
 .login {
   width: 100vw;
-  height: calc(100vh - 80px - 123px ); /* Es el total de la pantalla, menos el espacio del header (67px) */
+  height: calc(100vh - 123px - 171px);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #EDE0D4;
@@ -30,11 +30,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    width: 90%;
+    max-width: 360px;
   }
 
   &__input {
-    width: 360px;
+    width: 100%;
     border: none;
     border-bottom: 1px solid #4A3F35;
     background: transparent;
@@ -54,9 +56,10 @@
   &__button {
     background: none;
     border: none;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     color: #4A3F35;
+    transition: transform 0.2s ease;
 
     &:hover {
       transform: scale(1.1);
@@ -73,7 +76,37 @@
       text-decoration: underline;
     }
   }
-}
 
+  @media (min-width: 768px) {
+    &__form {
+      gap: 20px;
+      max-width: 400px;
+    }
+
+    &__input {
+      font-size: 18px;
+    }
+
+    &__button {
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    height: calc(100vh - 80px - 67px);
+    
+    &__form {
+      max-width: 450px;
+    }
+
+    &__input {
+      font-size: 20px;
+    }
+
+    &__button {
+      font-size: 22px;
+    }
+  }
+}
 
 </style>
