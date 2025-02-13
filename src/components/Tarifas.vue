@@ -41,23 +41,22 @@
 
 <style lang="scss" scoped>
 .tarifas {
-  height: calc(100vh + 107px);
+  height: calc(100vh - 107px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   background-color: #F4F4F4;
   width: 100%;
-  min-width: 100%;
   text-align: center;
   padding-top: 5%;
+  min-width: 100%;
 
   &__title {
     font-family: jaro;
     font-size: 35px;
     font-weight: bold;
     color: #3A9D64;
-    text-align: center;
     margin-bottom: 5%;
   }
 
@@ -85,35 +84,47 @@
     font-size: 40px;
     font-weight: bold;
     color: black;
-    text-align: center;
     margin-bottom: 20px;
   }
 
   &__description {
     font-size: 16px;
-    color: #000000;
-    text-align: center;
-    align-items: center;
+    color: #000;
+  }
+}
+
+@media (min-width: 768px) {
+  .tarifas {
+    &__content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    &__card {
+      width: 45%;
+      max-width: 350px;
+    }
   }
 }
 
 @media (min-width: 1024px) {
-
   .tarifas {
-    height: calc(100vh - 83px);
+    height: calc(100vh - 107px);
 
     &__title {
       font-size: 70px;
     }
 
     &__content {
-      flex-direction: row;
       justify-content: space-evenly;
       width: 80%;
     }
 
     &__card {
-      margin-bottomom: 15%;
+      width: 30%;
+      max-width: 400px;
     }
   }
 }

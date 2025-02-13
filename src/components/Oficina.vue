@@ -1,7 +1,23 @@
 <template>
     <v-container class="oficina">
-      <h1 class="oficina__title">La Oficina</h1>
-  
+      <div class="oficina__carousel-container">
+        <v-carousel hide-delimiters class="oficina__carousel">
+          <v-carousel-item class="oficina__carrousel-image"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            cover
+          ></v-carousel-item>
+          <v-carousel-item class="oficina__carrousel-image"
+            src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+            cover
+          ></v-carousel-item>
+          <v-carousel-item class="oficina__carrousel-image"
+            src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            cover
+          ></v-carousel-item>
+        </v-carousel>
+        <h1 class="oficina__title">La Oficina</h1>
+      </div>
+      
       <v-card-text class="oficina__description">
         Una zona de coworking es un espacio diseñado para fomentar la productividad, 
         la colaboración y el networking entre profesionales de diferentes sectores. 
@@ -16,85 +32,127 @@
     </v-container>
   </template>
   
+
   <style lang="scss" scoped>
-  .oficina {
-      background-color: #D9D9D9;
-      height: calc(100vh - 123px);
-      width: 100%;
-      min-width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 5%;
-  
-      &__title {
-          font-family: jaro;
-          font-size: 35px;
-          font-weight: bold;
-          color: #3A9D64;
-          margin-top: 5%;
-      }
-  
-      &__description {
-          margin-top: 2%;
-          background: transparent;
-          padding: 20px;
-          font-size: 15px;
-          color: #000000;
-          text-align: justify;
-          max-width: 100%;
-       
+ .oficina {
+  background-color: #D9D9D9;
+  height: calc(100vh - 123px);
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5%;
+  box-sizing: border-box;
+  justify-content: space-between;
 
-      }
-  
-      &__button {
-          background-color: #3A9D64;
-          color: #000000;
-          font-size: 20px;
-          padding: 15px;
-          border-radius: 8px;
-          min-width: 150px;
-          min-height: 50px;
-          margin-bottom: 35%;
-      }
+  &__carousel-container {
+    position: relative;
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  
-  @media (min-width: 768px) {
-      .oficina {
-          &__title {
-              font-size: 70px;
-          }
-  
-          &__description {
-            font-size: 16px;
-            margin-left: 15%;
-              margin-right: 15%;
 
-          }
-  
-          &__button {
-            margin-top: 10%;
-              font-size: 28px;
-              padding: 20px;
-              min-width: 200px;
-              min-height: 70px;
-              margin-bottom: 35%;
-          }
-      }
+  &__carousel {
+    width: 100%;
+    height: 100%;
   }
-  @media (min-width: 1024px) {
-    .oficina{
-        &__description{
-            font-size: 22px;
-        }
 
-        &__button {
-            margin-top: 1.5%;
-            margin-bottom: 2%;
-            min-width: 250px;
-            min-height: 75px;
-        }
-    }
+  &__title {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: jaro;
+    font-weight: bold;
+    font-size: 35px;
+    color: #3A9D64;
+    background: #e7e7e7;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  &__description {
+    background: transparent;
+    padding: 20px;
+    font-size: 15px;
+    color: #000000;
+    text-align: justify;
+    max-width: 80%;
+  }
+
+  &__button {
+    background-color: #3A9D64;
+    color: #000000;
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    min-width: 140px;
+    min-height: 45px;
+    margin-bottom: 2rem;
+    max-width: 90%;
+    white-space: nowrap;
+  }
 }
-  </style>
+
+
+@media (max-width: 620px) {
+  .oficina {
+    height: calc(100vh - 123px);
+    
+    &__carousel-container {
+      height: 25vh;
+    }
+
+    &__button {
+      font-size: 16px;
+      padding: 10px 20px;
+      min-width: auto;
+      max-width: 80%;
+      min-height: 40px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .oficina {
+    &__carousel-container {
+      height: 35vh;
+    }
+    &__title {
+      font-size: 50px;
+    }
+    &__description {
+      font-size: 16px;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+    &__button {
+      font-size: 24px;
+      padding: 15px 30px;
+      min-width: 180px;
+      min-height: 60px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .oficina {
+    &__carousel-container {
+      height: 40vh;
+    }
+    &__description {
+      font-size: 18px;
+    }
+    &__button {
+      font-size: 20px;
+      padding: 12px 28px;
+      min-width: 200px;
+      min-height: 65px;
+    }
+  }
+}
+</style>
