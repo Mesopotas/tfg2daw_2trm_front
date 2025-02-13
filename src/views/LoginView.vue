@@ -6,7 +6,7 @@
 
       <button type="submit" class="login__button">→</button>
 
-      <a href="#" class="login__register">¿No tienes cuenta? Registrarte</a>
+      <router-link to="register"><a class="login__register">¿No tienes cuenta? Registrarte</a></router-link>
     </form>
   </div>
 </template>
@@ -20,7 +20,7 @@
 
 .login {
   width: 100vw;
-  height: calc(100vh - 67px); /* Es el total de la pantalla, menos el espacio del header (67px) */
+  height: calc(100vh - 80px - 123px ); /* Es el total de la pantalla, menos el espacio del header (67px) */
   display: flex;
   justify-content: center;
   align-items: center;

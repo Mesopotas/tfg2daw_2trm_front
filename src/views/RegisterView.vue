@@ -19,7 +19,7 @@
   <style lang="scss" scoped>
   .login {
     width: 100vw;
-    height: calc(100vh - 67px); /* Es el total de la pantalla, menos el espacio del header (67px) */
+    height: calc(100vh - 80px - 123px); /* Es el total de la pantalla, menos el espacio del header (67px) */
     display: flex;
     justify-content: center;
     align-items: center;
