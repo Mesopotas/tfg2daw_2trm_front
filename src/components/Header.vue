@@ -44,12 +44,18 @@ export default defineComponent({});
         position: relative;
     }
 
+    a{
+        position: relative;
+    }
+
     &__logo {
         position: absolute;
         left: 10px;
         color: #FFFFFF;
         font-size: 18px;
         font-weight: bold;
+        top: -13px;
+        width: 102px;
     }
 
     &__menu {
@@ -58,6 +64,7 @@ export default defineComponent({});
         align-items: center;
         width: 100%;
         gap: 10px;
+        padding-left: 65px;
     }
 
     &__link {
@@ -121,3 +128,4 @@ export default defineComponent({});
 }
 }
 </style>
+
