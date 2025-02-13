@@ -21,45 +21,67 @@ export default defineComponent({});
 </template>
 
 <style lang="scss" scoped>
-
 @use '../assets/styles/_variables.scss' as *;
 
+//Width de 108px
 .footer {
   background-color: $primary-color;
   padding: 20px 0;
   color: white;
-
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   &__container {
+    flex-direction: row;
     display: flex;
-    justify-content: center;
-    text-align: left;
-
-    &--content {
-      margin-left: 30px;
-    }
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
   }
 
   &__list {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 15px 50px;
-    padding: 0;
-    list-style-type: disc;
-  }
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 0 50px;
+    }
 
   &__item {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   &__link {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 12px;
 
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  @media (min-width: 768px) {
+    &__container {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
+    }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 0 50px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    &__container {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
+    }
+    
   }
 }
 </style>
