@@ -24,6 +24,8 @@ export default defineComponent({});
 
 @use '../assets/styles/_variables.scss' as *;
 
+    //Width de 108px
+
 .footer {
   background-color: $primary-color;
   padding: 20px 0;
@@ -43,7 +45,7 @@ export default defineComponent({});
   &__list {
     display: grid;
     grid-template-columns: repeat(2, auto);
-    gap: 15px 50px;
+    gap: 0 50px;
     padding: 0;
     list-style-type: disc;
   }
@@ -55,10 +57,50 @@ export default defineComponent({});
   &__link {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 11px;
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+
+  @media (min-width: 768px) {
+
+    //Width de 108px
+
+    &__container {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
+    }
+    &__link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 0 50px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+
+    //Width de 108px
+
+    &__link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 0 50px;
     }
   }
 }
