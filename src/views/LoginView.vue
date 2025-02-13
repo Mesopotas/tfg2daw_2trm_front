@@ -97,7 +97,7 @@
 
   @media (min-width: 1024px) {
     
-    height: calc(100vh - 80px - 108px);
+    height: calc(100vh - 80px - 98px);
     
     &__form {
       max-width: 450px;

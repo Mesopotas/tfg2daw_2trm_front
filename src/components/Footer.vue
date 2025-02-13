@@ -33,6 +33,7 @@ export default defineComponent({});
   width: 100%;
 
   &__container {
+    flex-direction: row;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,13 +42,10 @@ export default defineComponent({});
   }
 
   &__list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 0;
-    list-style-type: none;
-  }
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 0 50px;
+    }
 
   &__item {
     margin-bottom: 5px;
