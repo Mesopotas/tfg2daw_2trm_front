@@ -41,7 +41,7 @@
 
 <style lang="scss" scoped>
 .tarifas {
-  height: calc(100vh - 67px);
+  height: calc(100vh + 107px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -54,7 +54,7 @@
 
   &__title {
     font-family: jaro;
-    font-size: 70px;
+    font-size: 35px;
     font-weight: bold;
     color: #3A9D64;
     text-align: center;
@@ -97,10 +97,14 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 
   .tarifas {
     height: calc(100vh - 83px);
+
+    &__title {
+      font-size: 70px;
+    }
 
     &__content {
       flex-direction: row;

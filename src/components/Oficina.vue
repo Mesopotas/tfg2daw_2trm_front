@@ -19,7 +19,7 @@
   <style lang="scss" scoped>
   .oficina {
       background-color: #D9D9D9;
-      height: calc(100vh);
+      height: calc(100vh - 123px);
       width: 100%;
       min-width: 100%;
       display: flex;
@@ -40,10 +40,12 @@
           margin-top: 2%;
           background: transparent;
           padding: 20px;
-          font-size: 16px;
+          font-size: 15px;
           color: #000000;
           text-align: justify;
           max-width: 100%;
+       
+
       }
   
       &__button {
@@ -54,7 +56,7 @@
           border-radius: 8px;
           min-width: 150px;
           min-height: 50px;
-          margin-bottom: 15%;
+          margin-bottom: 35%;
       }
   }
   
@@ -65,8 +67,8 @@
           }
   
           &__description {
-              font-size: 19px;
-              margin-left: 15%;
+            font-size: 16px;
+            margin-left: 15%;
               margin-right: 15%;
 
           }
@@ -81,4 +83,18 @@
           }
       }
   }
+  @media (min-width: 1024px) {
+    .oficina{
+        &__description{
+            font-size: 22px;
+        }
+
+        &__button {
+            margin-top: 1.5%;
+            margin-bottom: 2%;
+            min-width: 250px;
+            min-height: 75px;
+        }
+    }
+}
   </style>

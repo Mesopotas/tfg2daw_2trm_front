@@ -29,7 +29,7 @@
 
 <style lang="scss" scoped>
 .about {
-  height: calc(100vh);
+  height: calc(100vh + 90px);
   width: 100%;
   min-width: 100%;
   display: flex;
@@ -47,7 +47,7 @@
     font-family: jaro;
     align-items: center;
     padding-top: 5%;
-    font-size: 70px;
+    font-size: 35px;
     font-weight: bold;
     color: #3A9D64;
     text-align: center;
@@ -57,8 +57,10 @@
 
   &__content {
     flex-direction: column;
-    align-items: center;
     text-align: center;
+    align-content: space-around
+
+
   }
 
   &__image-col {
@@ -84,7 +86,6 @@
     font-weight: bold;
     color: black;
     text-align: left;
-    margin-bottom: 20px;
     text-align: center;
   }
 
@@ -99,7 +100,6 @@
   }
 
 }
-
 @media (min-width: 768px) {
   .about {
     height: calc(100vh);
@@ -110,8 +110,26 @@
     padding-left: 7%;
     padding-right: 10%;
     background-color: #F4F4F4;
+  &__image{
+    max-width: 500px;
+  }
+  
+}
+}
+
+@media (min-width: 1024px) {
+  .about {
+    height: calc(100vh);
+    width: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: 7%;
+    padding-right: 10%;
+    background-color: #F4F4F4;
+
     &__header{
-      margin-top: 65%;
+      font-size: 70px;
     }
 
     &__image-col {
@@ -123,18 +141,19 @@
       min-height: 100%;
 
     }
+    &__image{
+      max-width: 450px;
+    }
     &__text-col {
       max-height: 100%;
       min-height: 100%;
-      margin-right: 10%;
+      padding-top: 40px;
 
     }
       &__description {
         max-width: 100%;
         text-align: left;
-      }
-      &__image{
-        height: auto;
+        font-size: 20px;
       }
     
     &__sub-title{
