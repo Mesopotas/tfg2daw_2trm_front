@@ -21,64 +21,54 @@ export default defineComponent({});
 </template>
 
 <style lang="scss" scoped>
-
 @use '../assets/styles/_variables.scss' as *;
 
-    //Width de 108px
-
+//Width de 108px
 .footer {
   background-color: $primary-color;
   padding: 20px 0;
   color: white;
-
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 
   &__container {
     display: flex;
-    justify-content: center;
-    text-align: left;
-
-    &--content {
-      margin-left: 30px;
-    }
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
   }
 
   &__list {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     padding: 0;
-    list-style-type: disc;
+    list-style-type: none;
   }
 
   &__item {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   &__link {
     color: white;
     text-decoration: none;
-    font-size: 11px;
+    font-size: 12px;
 
     &:hover {
       text-decoration: underline;
     }
   }
 
-
   @media (min-width: 768px) {
-
-    //Width de 108px
-
     &__container {
       flex-direction: row;
       justify-content: center;
       text-align: left;
     }
-    &__link {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
 
     &__list {
       display: grid;
@@ -88,20 +78,12 @@ export default defineComponent({});
   }
 
   @media (min-width: 1024px) {
-
-    //Width de 108px
-
-    &__link {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
-
-    &__list {
-      display: grid;
-      grid-template-columns: repeat(2, auto);
-      gap: 0 50px;
+    &__container {
+      flex-direction: row;
+      justify-content: center;
+      text-align: left;
     }
+    
   }
 }
 </style>
