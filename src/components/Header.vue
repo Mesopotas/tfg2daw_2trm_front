@@ -10,7 +10,7 @@ export default defineComponent({});
 <template>
     <header class="nav-bar">
         <div class="nav-bar__container">
-            <h1 class="nav-bar__logo">La Oficina</h1>
+            <router-link to="home"> <h1 class="nav-bar__logo">La Oficina</h1></router-link>
             <nav class="nav-bar__menu">
                 <a href="#" class="nav-bar__link">Espacios</a>
                 <a href="#" class="nav-bar__link">Quienes Somos</a>
