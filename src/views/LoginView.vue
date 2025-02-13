@@ -19,7 +19,7 @@
 <style lang="scss" scoped>
 .login {
   width: 100vw;
-  height: calc(100vh - 123px - 108px);
+  height: calc(100vh - 123px - 186px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,7 +79,7 @@
 
   @media (min-width: 768px) {
 
-    height: calc(100vh - 80px - 108px);
+    height: calc(100vh - 75px - 98px);
 
     &__form {
       gap: 20px;
@@ -97,7 +97,7 @@
 
   @media (min-width: 1024px) {
     
-    height: calc(100vh - 80px - 108px);
+    height: calc(100vh - 80px - 98px);
     
     &__form {
       max-width: 450px;
