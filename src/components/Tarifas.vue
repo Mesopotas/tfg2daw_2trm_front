@@ -63,10 +63,9 @@
 
   &__content {
     display: flex;
-    justify-content:space-evenly;
-    width: 80%;
-    width: 80%;
-    gap: 15px; 
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   &__card {
@@ -75,6 +74,7 @@
     width: 300px;
     background-color: #F4F4F4;
     border: none;
+    margin-bottom: 5%;
   }
 
   &__text {
@@ -91,9 +91,26 @@
 
   &__description {
     font-size: 16px;
-      color: #000000;
-      text-align: center;
-      align-items: center;
+    color: #000000;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .tarifas {
+    height: calc(100vh - 83px);
+
+    &__content {
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 80%;
+    }
+
+    &__card {
+      margin-bottomom: 15%;
+    }
   }
 }
 </style>
