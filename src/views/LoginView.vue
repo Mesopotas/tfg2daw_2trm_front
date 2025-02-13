@@ -11,8 +11,12 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<script setup lang="ts">
 
+</script>
+
+
+<style lang="scss" scoped>
 
 .login {
   width: 100vw;

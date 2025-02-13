@@ -1,13 +1,12 @@
 <script lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import Login from './views/LoginView.vue';
 
 export default {
   components: {
     Header,
     Footer,
-    Login,
   },
 };
 </script>
@@ -15,6 +14,7 @@ export default {
 <template>
   <div class="layout">
     <Header />
+    <RouterView />
     <Footer />
   </div>
 </template>

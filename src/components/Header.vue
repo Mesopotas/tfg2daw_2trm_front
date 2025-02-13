@@ -16,7 +16,8 @@ export default defineComponent({});
                 <a href="#" class="nav-bar__link">Quienes Somos</a>
                 <a href="#" class="nav-bar__link">Tarifas</a>
             </nav>
-            <div class="nav-bar__circle"></div>
+            <router-link to="login"> <div class="nav-bar__circle"></div></router-link>
+
         </div>
     </header>
 </template>
@@ -66,7 +67,6 @@ export default defineComponent({});
     }
 
     &__circle {
-        position: absolute;
         right: 10px;
         width: 30px;
         height: 30px;
@@ -75,7 +75,7 @@ export default defineComponent({});
     }
 
     @media (min-width: 768px) {
-        padding: 20px 40px;
+        padding: 20px 20px;
 
         &__menu {
             flex-direction: row;
@@ -96,7 +96,7 @@ export default defineComponent({});
 
 @media (min-width: 1024px) {
     .nav-bar {
-    padding: 20px 80px 20px 20px;
+    padding: 20px 20px 20px 20px;
 
     &__container {
         width: 90%;
