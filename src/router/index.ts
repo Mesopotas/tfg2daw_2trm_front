@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import HomeView from '../views/HomeView.vue';
+import MesasView from '../views/MesasView.vue';
 //import UsersView from '@/views/UsersView.vue'
 //import AboutView from '@/views/AboutView.vue';
 
@@ -24,6 +25,11 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
+    {
+      path: '/elegir-mesa',
+      name: 'elegir-mesa',
+      component: MesasView,
+    }
   ],
 });
 export default router
