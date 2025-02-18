@@ -1,19 +1,48 @@
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useUsuarioStore } from "../stores/usuarios";
+import { verificarCredenciales } from "../utils/verifyUsers";
+
+// Variables del store y router
+const usuarioStore = useUsuarioStore();
+const router = useRouter();
+
+// Variables del formulario
+const usuario = ref("");
+const password = ref("");
+
+// 
+const login = async (event: Event) => {
+  event.preventDefault();
+
+  // Esto hace, que si la cantidad de usuarios de dentro del fetch es 0, espere a qe tenga
+  if (usuarioStore.usuarios.length === 0) {
+    await usuarioStore.fetchUsuarios();
+  }
+
+  // Llama a la funcion que hemos creado, y comprieba 
+
+  if (verificarCredenciales(usuario.value, password.value)) {
+    router.push("/#"); // Si estan bien metidos los datos mandara a dnd ponga
+  } else {
+    alert("Usuario o contraseña incorrectos"); // Si no saldra una alerta
+  }
+};
+
+</script>
+
 <template>
   <div class="login">
-    <form class="login__form">
-      <input type="text" id="usuario" class="login__input" placeholder="Usuario">
-      <input type="password" id="password" class="login__input" placeholder="Contraseña">
-
+    <form class="login__form" @submit="login">
+      <input type="text" v-model="usuario" class="login__input" placeholder="Usuario">
+      <input type="password" v-model="password" class="login__input" placeholder="Contraseña">
       <button type="submit" class="login__button">→</button>
-
       <router-link to="register"><a class="login__register">¿No tienes cuenta? Registrarte</a></router-link>
     </form>
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
 
 
 <style lang="scss" scoped>
