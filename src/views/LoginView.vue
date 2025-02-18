@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useUsuarioStore } from "../stores/usuarios";
+import { UsuarioStore } from "../stores/usuarios";
 import { verificarCredenciales } from "../utils/verifyUsers";
 
 // Variables del store y router
-const usuarioStore = useUsuarioStore();
+const usuarioStore = UsuarioStore();
 const router = useRouter();
 
 // Variables del formulario
