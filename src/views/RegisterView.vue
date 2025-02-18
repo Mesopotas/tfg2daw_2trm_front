@@ -1,20 +1,55 @@
-<template>
-    <div class="login">
-      <form class="login__form">
-        <div class="login__row">
-          <input type="text" id="usuario" class="login__input" placeholder="Usuario">
-          <input type="text" id="nombre" class="login__input" placeholder="Nombre">
-        </div>
-        <div class="login__row">
-          <input type="text" id="apellidos" class="login__input" placeholder="Apellidos">
-          <input type="email" id="correo" class="login__input" placeholder="Correo">
-        </div>
-        <input type="password" id="password" class="login__input login__input--full" placeholder="Contraseña">
+<script setup lang="ts">
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { registerUser } from "../utils/createUsers"; 
+
+// Variables del store y router
+
+const router = useRouter();
+
+// Variables del formulario
+
+const nombre = ref("");
+const apellidos = ref("");
+const email = ref("");
+const contrasenia = ref("");
+const idRol = ref(1); // Valor por defecto porque un usuario normal es 1
+
+const registrarUsuario = async (event: Event) => {
+  event.preventDefault();
+
+  await registerUser(
+    nombre.value,
+    apellidos.value,
+    email.value,
+    contrasenia.value,
+    idRol.value
+  );
+
+  alert("Usuario registrado con éxito!");
+
+  // Redirige al login después del registro
   
-        <button type="submit" class="login__button">→</button>
-      </form>
-    </div>
-  </template>
+  router.push("/login");
+
+};
+</script>
+
+<template>
+  <div class="login">
+    <form class="login__form" @submit="registrarUsuario">
+      <input type="text" v-model="nombre" class="login__input login__input--full" placeholder="Nombre">
+      <div class="login__row">
+        <input type="text" v-model="apellidos" class="login__input" placeholder="Apellidos">
+        <input type="email" v-model="email" class="login__input" placeholder="Correo">
+      </div>
+      <input type="password" v-model="contrasenia" class="login__input login__input--full" placeholder="Contraseña">
+
+      <button type="submit" class="login__button">→</button>
+    </form>
+  </div>
+</template>
+
   
   <style lang="scss" scoped>
   .login {
