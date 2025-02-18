@@ -41,23 +41,23 @@
 
 <style lang="scss" scoped>
 .tarifas {
-  height: calc(100vh - 107px);
+  min-height: calc(100vh - 107px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   background-color: #F4F4F4;
-  width: 100%;
-  text-align: center;
-  padding-top: 5%;
   min-width: 100%;
+  padding: 5% 2%;
+  box-sizing: border-box;
 
   &__title {
-    font-family: jaro;
-    font-size: 35px;
+    font-family: 'Jaro', sans-serif;
+    font-size: 32px;
     font-weight: bold;
     color: #3A9D64;
-    margin-bottom: 5%;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   &__content {
@@ -68,28 +68,37 @@
   }
 
   &__card {
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 24px;
     text-align: center;
-    padding: 20px;
     width: 300px;
-    background-color: #F4F4F4;
-    border: none;
-    margin-bottom: 5%;
+    margin-bottom: 32px;
+  }
+
+  &__image {
+    border-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 16px;
   }
 
   &__text {
-    margin-top: 10px;
+    margin-top: 16px;
   }
 
   &__name {
-    font-size: 40px;
+    font-size: 28px;
     font-weight: bold;
     color: black;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   &__description {
     font-size: 16px;
     color: #000;
+    line-height: 1.5;
   }
 }
 
@@ -99,11 +108,11 @@
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 24px; 
     }
 
     &__card {
-      width: 45%;
+      width: 50%;
       max-width: 350px;
     }
   }
@@ -111,19 +120,17 @@
 
 @media (min-width: 1024px) {
   .tarifas {
-    height: calc(100vh - 107px);
-
     &__title {
-      font-size: 70px;
+      font-size: 48px;
     }
 
     &__content {
-      justify-content: space-evenly;
       width: 80%;
+      justify-content: space-evenly;
     }
 
     &__card {
-      width: 30%;
+      width: 33.33%;
       max-width: 400px;
     }
   }
