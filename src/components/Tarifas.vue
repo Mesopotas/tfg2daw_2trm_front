@@ -55,7 +55,7 @@
     font-size: 32px;
     font-weight: bold;
     color: #3A9D64;
-    margin-bottom: 32px;
+    margin-bottom: 7%;
     text-transform: uppercase;
     letter-spacing: 2px;
   }
@@ -106,10 +106,10 @@
   .tarifas {
     &__content {
       flex-direction: row;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
-      gap: 24px; 
-    }
+      gap: 7%;
+        }
 
     &__card {
       width: 50%;
@@ -127,6 +127,7 @@
     &__content {
       width: 80%;
       justify-content: space-evenly;
+      gap: 5%;
     }
 
     &__card {

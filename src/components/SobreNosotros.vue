@@ -51,7 +51,7 @@
     font-weight: bold;
     color: #3A9D64;
     text-align: center;
-    margin-top: 15%;
+    margin-top: 20%;
     margin-bottom: 20px;
   }
 
@@ -119,54 +119,62 @@
 
 @media (min-width: 1024px) {
   .about {
-    height: calc(100vh);
-    width: 100%;
-    min-width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-left: 7%;
-    padding-right: 10%;
-    background-color: #F4F4F4;
+    &__content {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
 
-    &__header{
-      font-size: 70px;
     }
 
     &__image-col {
       display: flex;
       justify-content: center;
+      align-items: flex-start;
       padding: 20px;
       max-width: 50%;
-      max-height: 100%;
-      min-height: 100%;
+      height: 100%;
+    }
 
-    }
-    &__image{
-      max-width: 450px;
-    }
-    &__text-col {
-      max-height: 100%;
-      min-height: 100%;
-      padding-top: 40px;
-
-    }
-      &__description {
-        max-width: 100%;
-        text-align: left;
-        font-size: 20px;
-      }
-    
-    &__sub-title{
-      text-align: left;
-    }
-    &__content {
+    &__image {
       width: 100%;
-      margin: 0;
-      align-items: center;
-      display: flex;
-      flex-direction: row;
+      max-width: 600px;
+      height: auto;
+      border-radius: 5px;
+    }
 
+    &__text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 20px;
+      max-width: 50%;
+    }
+
+    &__header {
+      font-size: 70px;
+    }
+
+    &__sub-title {
+      text-align: left;
+      font-size: 40px;
+      margin-bottom: 1rem;
+    }
+
+    &__description {
+      max-width: 100%;
+      text-align: left;
+      font-size: 14px;
     }
   }
+  @media (min-width: 1524px) {
+    .about {
+    &__description {
+      font-size: 20px;
+    }
+  }
+}
+
 }
 </style>
