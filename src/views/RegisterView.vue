@@ -124,6 +124,7 @@ const registrarUsuario = async (event: Event) => {
 /* Media Query para pantallas de 1024px o mayores */
 @media (min-width: 1024px) {
   .login {
+    height: calc(100vh - 80px - 98px); /* Resta la altura del header */
     &__row {
       flex-direction: row; /* En pantallas medianas, los inputs se alinean horizontalmente */
     }
