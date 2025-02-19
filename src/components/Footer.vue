@@ -28,7 +28,7 @@ export default defineComponent({});
   background-color: $primary-color;
   padding: 20px 0;
   color: white;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 
