@@ -16,8 +16,15 @@ export const UsuarioStore = defineStore("usuario", {
 
   actions: {
     // Obtener usuarios (GET)
-    async fetchUsuarios() {
-      const res = await fetch("https://localhost:7179/api/Usuarios");
+    async loginUsuario(email: string) {
+      const res = await fetch(`https://localhost:7179/api/Usuarios/clientes/${email}`);
+      if (res.status === 404) {
+        throw new Error("Correo no encontrado");
+      }
+  
+      if (!res.ok) {
+        throw new Error("Error en la solicitud");
+      }
       this.usuarios = await res.json();
       console.log("Usuarios:", this.usuarios);
     },

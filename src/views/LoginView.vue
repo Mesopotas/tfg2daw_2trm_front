@@ -18,7 +18,7 @@ const login = async (event: Event) => {
 
   // Esto hace, que si la cantidad de usuarios de dentro del fetch es 0, espere a qe tenga
   if (usuarioStore.usuarios.length === 0) {
-    await usuarioStore.fetchUsuarios();
+    await usuarioStore.loginUsuario(usuario.value);
   }
 
   // Llama a la funcion que hemos creado, y comprieba 
