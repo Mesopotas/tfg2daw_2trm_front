@@ -108,7 +108,32 @@
     white-space: nowrap;
   }
 }
+@media (max-width: 395px) and (min-width: 321px) {
+  .oficina {
+    padding: 3%;
+    gap: 20px;
 
+    &__title {
+      font-size: 18px;
+      padding: 8px 15px;
+      bottom: 5%;
+    }
+
+    &__description {
+      font-size: 14px;
+      padding: 10px;
+      max-width: 85%;
+    }
+
+    &__button {
+      font-size: 14px;
+      padding: 8px 16px;
+      min-width: 100px;
+      min-height: 35px;
+      max-width: 80%;
+    }
+  }
+}
 @media (max-width: 620px) {
   .oficina {
     &__carousel-container {

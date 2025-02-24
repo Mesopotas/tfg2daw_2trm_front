@@ -8,7 +8,7 @@
     <v-divider></v-divider>
     <v-row class="about__content">
       <v-col class="about__image-col">
-        <v-img class="about__image" src="https://placehold.co/1700x1200"></v-img>
+        <v-img class="about__image" src="https://placehold.co/1700x1200" height="100%" cover></v-img>
       </v-col>
       <v-col class="about__text-col">
         <h2 class="about__sub-title">LOREM</h2>
@@ -31,25 +31,22 @@
 .about {
   height: calc(100vh + 90px);
   width: 100%;
-  min-width: 100%;
   display: flex;
+  min-width: 100%;
   justify-content: center;
   padding-left: 7%;
   padding-right: 10%;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   flex-direction: column;
   align-items: center;
   text-align: center;
 
-
-
   &__header {
     font-family: jaro;
-    align-items: center;
     padding-top: 5%;
     font-size: 35px;
     font-weight: bold;
-    color: #3A9D64;
+    color: #3a9d64;
     text-align: center;
     margin-top: 20%;
     margin-bottom: 20px;
@@ -58,9 +55,7 @@
   &__content {
     flex-direction: column;
     text-align: center;
-    align-content: space-around
-
-
+    align-content: space-around;
   }
 
   &__image-col {
@@ -85,7 +80,6 @@
     font-size: 40px;
     font-weight: bold;
     color: black;
-    text-align: left;
     text-align: center;
   }
 
@@ -98,83 +92,106 @@
     text-align: justify;
     max-width: 100%;
   }
-
 }
+
 @media (min-width: 768px) {
   .about {
     height: calc(100vh);
     width: 100%;
-    min-width: 100%;
-    display: flex;
-    justify-content: center;
     padding-left: 7%;
     padding-right: 10%;
-    background-color: #F4F4F4;
-  &__image{
-    max-width: 500px;
+
+    &__content {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      padding: 20px;
+    }
+
+    &__image-col {
+      max-width: 50%;
+      padding: 20px;
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    &__text-col {
+      max-width: 50%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    &__header {
+      font-size: 50px;
+      padding-top: 5%;
+      margin-top: 10%;
+      margin-bottom: 20px;
+    }
+
+    &__sub-title {
+      font-size: 35px;
+      text-align: left;
+    }
+
+    &__description {
+      font-size: 16px;
+      padding: 15px;
+      margin-top: 2%;
+      text-align: left;
+    }
   }
-  
-}
 }
 
 @media (min-width: 1024px) {
   .about {
     &__content {
       width: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-
+      padding: 20px;
     }
 
     &__image-col {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 20px;
       max-width: 50%;
-      height: 100%;
+      padding: 20px;
     }
 
     &__image {
-      width: 100%;
       max-width: 600px;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       border-radius: 5px;
     }
 
     &__text-col {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 20px;
       max-width: 50%;
+      padding: 20px;
     }
 
     &__header {
       font-size: 70px;
+      padding-top: 5%;
+      margin-top: 10%;
+      margin-bottom: 20px;
     }
 
     &__sub-title {
-      text-align: left;
       font-size: 40px;
+      text-align: left;
       margin-bottom: 1rem;
     }
 
     &__description {
-      max-width: 100%;
+      font-size: 16px;
+      padding: 20px;
+      margin-top: 2%;
       text-align: left;
-      font-size: 14px;
     }
   }
-  @media (min-width: 1524px) {
-    .about {
-    &__description {
-      font-size: 20px;
-    }
-  }
-}
-
 }
 </style>
