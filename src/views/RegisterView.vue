@@ -1,49 +1,63 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { registerUser } from "../utils/createUsers"; 
+import { RegisterStore } from "../stores/RegisterStore.ts";
 
-// Variables del store y router
-
+const registerStore = RegisterStore();
 const router = useRouter();
 
-// Variables del formulario
-
+// Variables datos del formulario y mensajes aclarativos
 const nombre = ref("");
 const apellidos = ref("");
 const email = ref("");
 const contrasenia = ref("");
-const idRol = ref(1); // Valor por defecto porque un usuario normal es 1
+const mensajeError = ref("");
+const mensajeExito = ref("");
 
+// Funcion flecha registro user
 const registrarUsuario = async (event: Event) => {
   event.preventDefault();
 
-  await registerUser(
-    nombre.value,
-    apellidos.value,
-    email.value,
-    contrasenia.value,
-    idRol.value
-  );
+  mensajeError.value = ""; // vuelve null cualquier mensaje de error que haya previamente
+  mensajeExito.value = ""; // vuelve null cualquier mensaje de exito que haya previamente
 
-  alert("Usuario registrado con éxito!");
+  if (nombre.value && apellidos.value && email.value && contrasenia.value) /*comprobar q no falte ningun dato*/{
+    const datosRegistro = {
+      nombre: nombre.value,
+      apellidos: apellidos.value,
+      email: email.value,
+      contrasenia: contrasenia.value,
+    };
 
-  // Redirige al login después del registro
-  
-  router.push("/login");
+    const registroExitoso = await registerStore.registerUsuario(datosRegistro); // Llamar al store para registrar
 
+    if (registroExitoso) {
+      mensajeExito.value = registerStore.successMessage || "Registro añadido correctamente";
+      setTimeout(() => {
+        router.push("/#exito"); // contador de 3,5 segundos para dar tiempo a leer el mensaje sin problemas, luego deberia redirigir a la zona privada
+      }, 3500);
+    } else {
+      mensajeError.value = registerStore.errorMessage || "Error en el registro. Intentalo de nuevo.";
+    }
+  } else {
+    mensajeError.value = "Todos los campos son obligatorios";
+  }
 };
 </script>
 
 <template>
   <div class="login">
     <form class="login__form" @submit="registrarUsuario">
-      <input type="text" v-model="nombre" class="login__input login__input--full" placeholder="Nombre">
+      <input type="text" v-model="nombre" class="login__input login__input--full" placeholder="Nombre" required>
       <div class="login__row">
-        <input type="text" v-model="apellidos" class="login__input" placeholder="Apellidos">
-        <input type="email" v-model="email" class="login__input" placeholder="Correo">
+        <input type="text" v-model="apellidos" class="login__input" placeholder="Apellidos" required>
+        <input type="email" v-model="email" class="login__input" placeholder="Correo" required>
       </div>
-      <input type="password" v-model="contrasenia" class="login__input login__input--full" placeholder="Contraseña">
+      <input type="password" v-model="contrasenia" class="login__input login__input--full" placeholder="Contraseña" required>
+
+      <div v-if="mensajeExito" class="login__success">{{ mensajeExito }}</div>
+      <div v-if="mensajeError" class="login__error">{{ mensajeError }}</div>
+      <!-- elementos condicionales de si el registro se efectua o no para mostrar informacion aclarativa-->
 
       <button type="submit" class="login__button">→</button>
     </form>
@@ -108,6 +122,20 @@ const registrarUsuario = async (event: Event) => {
     &:hover {
       transform: scale(1.1);
     }
+  }
+
+  &__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+  }
+
+  &__success {
+    color: green;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
   }
 }
 

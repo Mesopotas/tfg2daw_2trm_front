@@ -1,49 +1,48 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { UsuarioStore } from "../stores/usuarios";
-import { verificarCredenciales } from "../utils/verifyUsers";
+import { LoginStore } from "../stores/LoginStore.ts";
 
-// Variables del store y router
-const usuarioStore = UsuarioStore();
+const loginStore = LoginStore();
 const router = useRouter();
 
-// Variables del formulario
 const usuario = ref("");
 const password = ref("");
+const mensajeError = ref("");
 
-// 
 const login = async (event: Event) => {
-  event.preventDefault();
+  event.preventDefault(); // Evita que el formulario haga q se recargue la pagina
+  mensajeError.value = "";
 
-  // Esto hace, que si la cantidad de usuarios de dentro del fetch es 0, espere a qe tenga
-  if (usuarioStore.usuarios.length === 0) {
-    await usuarioStore.fetchUsuarios();
-  }
-
-  // Llama a la funcion que hemos creado, y comprieba 
-
-  if (verificarCredenciales(usuario.value, password.value)) {
-    router.push("/#"); // Si estan bien metidos los datos mandara a dnd ponga
-  } else {
-    alert("Usuario o contraseña incorrectos"); // Si no saldra una alerta
+  if (usuario.value && password.value)/* prevenir que no falten campos por rellenar */ {
+    const loginData = { email: usuario.value, contrasenia: password.value }; // crea el objeto q se enviará en el POST para luego recibir el token
+          await loginStore.loginUsuario(loginData);
+      
+      if (loginStore.token) /* si recibe el token con exito */{
+        router.push("/#exito");  // cambiar a la ruta de la pagina privada de usuario con su data
+      } else {
+        mensajeError.value = loginStore.errorMessage || "Credenciales incorrectas";
+      }
+   
+  } else /* si uno de los 2 campos o ambos no tienen valor */ {
+    mensajeError.value = "Usuario y contraseña son requeridos";
   }
 };
-
 </script>
 
 <template>
   <div class="login">
     <form class="login__form" @submit="login">
-      <input type="text" v-model="usuario" class="login__input" placeholder="Usuario">
-      <input type="password" v-model="password" class="login__input" placeholder="Contraseña">
+      <input type="text" v-model="usuario" class="login__input" placeholder="Usuario" required>
+      <input type="password" v-model="password" class="login__input" placeholder="Contraseña" required>
+      
+      <div v-if="mensajeError" class="login__error">{{ mensajeError }}</div> <!-- v-if quiere decir que si la constante mensajeError tiene datos (es decir algo ha fallado), se mostrará, sino no, es decir que todo habrá funcionado-->
+      
       <button type="submit" class="login__button">→</button>
-      <router-link to="register"><a class="login__register">¿No tienes cuenta? Registrarte</a></router-link>
+      <router-link to="/register" class="login__register">¿No tienes cuenta? Registrarte</router-link>
     </form>
   </div>
 </template>
-
-
 
 <style lang="scss" scoped>
 .login {
@@ -82,6 +81,13 @@ const login = async (event: Event) => {
     }
   }
 
+  &__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+  }
+
   &__button {
     background: none;
     border: none;
@@ -107,7 +113,6 @@ const login = async (event: Event) => {
   }
 
   @media (min-width: 768px) {
-
     height: calc(100vh - 75px - 98px);
 
     &__form {
@@ -125,7 +130,6 @@ const login = async (event: Event) => {
   }
 
   @media (min-width: 1024px) {
-    
     height: calc(100vh - 80px - 98px);
     
     &__form {
@@ -141,5 +145,4 @@ const login = async (event: Event) => {
     }
   }
 }
-
 </style>
