@@ -17,7 +17,7 @@
           sin las ataduras de una oficina tradicional.
         </v-card-text>
         <div class="oficina__button-container">
-          <v-btn class="oficina__button">Espacios</v-btn>
+          <RouterLink to = "centros"> <v-btn class="oficina__button">Espacios</v-btn> </RouterLink>
         </div>
       </div>
     </v-carousel>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
   data() {
     return {
@@ -41,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .oficina {
   position: relative;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 80px - 123px);
   margin: 0;
   padding: 0;
   overflow: hidden;
