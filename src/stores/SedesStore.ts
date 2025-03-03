@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue'; 
 
 interface Sede {
   idSede: number;
@@ -10,26 +11,15 @@ interface Sede {
   observaciones?: string;
 }
 
-export const useSedesStore = defineStore('sedes', {
-  state: () => ({
-    sedes: [] as Sede[],
-  }),
+export const useSedesStore = defineStore('sedes', () => {
+  const sedes = ref<Sede[]>([]);
 
-  actions: {
-    async fetchSedes() {
-      try {
-        const response = await fetch('https://localhost:7179/api/Sedes');
-        const data = await response.json();
+  const fetchSedes = async () => {
+    const response = await fetch('https://localhost:7179/api/Sedes');
+    sedes.value = await response.json();
+  };
 
-        // Verificamos que la API realmente devuelve un array
-        if (Array.isArray(data)) {
-          this.sedes = data;
-        } else {
-          console.error("La API no devolvió un array:", data);
-        }
-      } catch (error) {
-        console.error("Error al obtener las sedes:", error);
-      }
-    }
-  }
+  fetchSedes(); // Se ejecuta automáticamente
+
+  return { sedes };
 });
