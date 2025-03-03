@@ -5,6 +5,8 @@ import RegisterView from '../views/RegisterView.vue';
 import HomeView from '../views/HomeView.vue';
 import MesasView from '../views/MesasView.vue';
 import CentrosView from '../views/CentrosView.vue';
+import UserInfoView from '../views/UserInfoView.vue'; // Asegúrate de importar la nueva vista
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +35,11 @@ const router = createRouter({
       path: '/centros',
       name: 'centros',
       component: CentrosView,
+    },
+    {
+      path: '/userinfo',
+      name: 'userinfo',
+      component: UserInfoView,
     }
   ],
 });

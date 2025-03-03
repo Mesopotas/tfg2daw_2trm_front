@@ -1,5 +1,5 @@
 # version de node que tengo en mi pc y que se que funciona
-FROM node:22.11.0-alpine as construccion
+FROM node:18 as construccion
 
 WORKDIR /app
 
