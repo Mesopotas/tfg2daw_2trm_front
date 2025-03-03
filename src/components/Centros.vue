@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { useSedesStore } from '../stores/SedesStore';
 import TargetCenter from '../components/TargetCenter.vue';
 
-const sedesStore = useSedesStore();
-
-onMounted(async () => {
-  await sedesStore.fetchSedes();
-});
+const sedesStore = useSedesStore(); // 🔹 Se carga automáticamente
 </script>
 
 <template>
   <div class="centros">
+    <br><br>
     <h2 class="centros__titulo">Centros</h2>
     <div class="centros__linea"></div>
 
@@ -26,11 +22,10 @@ onMounted(async () => {
   </div>
 </template>
 
-
-<style>
-
+<style scoped>
 .centros {
   height: calc(100vh - 123px - 98px);
+  text-align: center;
 
   @media (min-width: 768px) {
     height: calc(100vh - 75px - 98px);
@@ -39,5 +34,13 @@ onMounted(async () => {
   @media (min-width: 1024px) {
     height: calc(100vh - 80px - 98px);
   }
+}
+
+.fila_tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 20px;
 }
 </style>
