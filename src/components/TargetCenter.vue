@@ -53,7 +53,6 @@ defineProps<{
   }
 }
 
-/* Estilos para cada tarjeta */
 .tarjeta {
   background: white;
   padding: 16px;
@@ -83,7 +82,6 @@ defineProps<{
   }
 }
 
-/* 📱 Móvil: 1 tarjeta por fila */
 @media (max-width: 768px) {
   .fila_tarjetas {
     justify-content: center;
@@ -95,7 +93,6 @@ defineProps<{
   }
 }
 
-/* 📲 Tablet: 2 tarjetas por fila */
 @media (min-width: 768px) {
   .fila_tarjetas {
     justify-content: space-around;
@@ -106,7 +103,6 @@ defineProps<{
   }
 }
 
-/* 🖥️ Escritorio: 4 tarjetas por fila */
 @media (min-width: 1024px) {
 
 
