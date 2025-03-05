@@ -1,49 +1,45 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { useSedesStore } from '../stores/SedesStore';
-const sedesStore = useSedesStore();
-
-interface Zona {
-  idZonaTrabajo: number;
-  descripcion: string;
-}
-
-interface PuestoTrabajo {
-  idPuestoTrabajo: number;
-  codigoMesa: number;
-  disponible: boolean;
-}
+import { ref, watch } from 'vue';
+import { useSedesStore } from './SedesStore';
 
 interface Sala {
   idSala: number;
   nombre: string;
-  zona: Zona[];
-  puestos: PuestoTrabajo[];
+  urL_Imagen: string;
+  capacidad: number;
+  bloqueado: boolean;
 }
 
 export const useSalasStore = defineStore('salas', () => {
   const salas = ref<Sala[]>([]);
+  const sedesStore = useSedesStore();
 
-  const fetchSalas = async (idSede: number) => {
-    const response = await fetch(`https://localhost:7179/api/Salas/search?idsede=${idSede}`);
-    const data = await response.json();
+  const fetchSalas = async (idSede: number | null) => {
+    if (!idSede) {
+      salas.value = [];
+      return;
+    }
 
-    // 🔹 Extraer solo la información necesaria
-    salas.value = data.map((sala: any) => ({
-      idSala: sala.idSala,
-      nombre: sala.nombre,
-      zona: sala.zona.map((zona: any) => ({
-        idZonaTrabajo: zona.idZonaTrabajo,
-        descripcion: zona.descripcion || "Sin descripción",
-      })),
-      puestos: sala.puestos.map((puesto: any) => ({
-        idPuestoTrabajo: puesto.idPuestoTrabajo,
-        codigoMesa: puesto.codigoMesa,
-        disponible: puesto.disponible,
-      })),
-    }));
+    try {
+      const response = await fetch(`https://localhost:7179/api/Salas/search?idsede=${idSede}`);
+      const data = await response.json();
+
+      salas.value = data.map((sala: any) => ({
+        idSala: sala.idSala,
+        nombre: sala.nombre,
+        urL_Imagen: sala.urL_Imagen || "https://via.placeholder.com/100",
+        capacidad: sala.capacidad,
+        bloqueado: sala.bloqueado,
+      }));
+    } catch (error) {
+      console.error("Error al obtener las salas:", error);
+      salas.value = []; 
+    }
   };
+
+  watch(() => sedesStore.selectedSedeId, (newIdSede) => {
+    fetchSalas(newIdSede);
+  });
 
   return { salas, fetchSalas };
 });
-
