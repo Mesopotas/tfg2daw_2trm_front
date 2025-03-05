@@ -17,7 +17,7 @@
           sin las ataduras de una oficina tradicional.
         </v-card-text>
         <div class="oficina__button-container">
-          <RouterLink to = "centros"> <v-btn class="oficina__button">Espacios</v-btn> </RouterLink>
+          <RouterLink to = "sedes"> <v-btn class="oficina__button">Espacios</v-btn> </RouterLink>
         </div>
       </div>
     </v-carousel>

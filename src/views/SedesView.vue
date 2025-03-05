@@ -1,15 +1,15 @@
 <script lang="ts">
-import Centros from '../components/Centros.vue';
+import Sedes from '../components/Sedes.vue';
 
 export default {
   components: {
-    Centros
+    Sedes
   },
 };
 </script>
 
 <template>
     <div class="layout">
-      <Centros />
+      <Sedes />
     </div>
   </template>

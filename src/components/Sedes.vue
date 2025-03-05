@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { useSedesStore } from '../stores/SedesStore';
-import TargetCenter from '../components/TargetCenter.vue';
+import TargetCenter from './TargetSedes.vue';
 
 const sedesStore = useSedesStore(); // 🔹 Se carga automáticamente
 </script>
 
 <template>
-  <div class="centros">
+  <div class="sedes">
     <br><br>
-    <h2 class="centros__titulo">Centros</h2>
-    <div class="centros__linea"></div>
+    <h2 class="sedes__titulo">Sedes</h2>
+    <div class="sedes__linea"></div>
+
+    <!--Aqui creamos un if, que lo que haces es que si sedes esta lleno, Crea un for que crea una targeta por cada sede que hay --> 
 
     <div v-if="sedesStore.sedes.length > 0" class="fila_tarjetas">
       <TargetCenter
@@ -18,12 +20,15 @@ const sedesStore = useSedesStore(); // 🔹 Se carga automáticamente
         v-bind="sede"
       />
     </div>
+
+    <!--Si no existe ninguna sede, aparecera que esta cargando infinitamente, aparte, como tarde un poco en guardar todas las salas, la primra vez que entres tmb saldra-->
+
     <p v-else>Cargando sedes...</p>
   </div>
 </template>
 
 <style scoped>
-.centros {
+.sedes {
   height: calc(100vh - 123px - 98px);
   text-align: center;
 
