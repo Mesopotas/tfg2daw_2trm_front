@@ -45,9 +45,9 @@ const handleClick = () => {
 
 <style lang="scss" scoped>
 .tarjeta-link {
-  text-decoration: none; // 🔹 Quita el subrayado del enlace
-  color: inherit; // 🔹 Mantiene el color original del texto
-  display: block; // 🔹 Hace que toda la tarjeta sea clickeable
+  text-decoration: none;
+  color: inherit;
+  display: block;
   width: 100%;
   max-width: 280px;
 
@@ -83,7 +83,6 @@ const handleClick = () => {
   }
 }
 
-/* 📱 Estilos Responsivos */
 @media (max-width: 768px) {
   .tarjeta-link {
     width: 90%;
