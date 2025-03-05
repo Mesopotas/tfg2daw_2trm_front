@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 
 interface Sede {
   idSede: number;
@@ -10,26 +11,33 @@ interface Sede {
   observaciones?: string;
 }
 
-export const useSedesStore = defineStore('sedes', {
-  state: () => ({
-    sedes: [] as Sede[],
-  }),
+export const useSedesStore = defineStore('sedes', () => {
 
-  actions: {
-    async fetchSedes() {
-      try {
-        const response = await fetch('https://localhost:7179/api/Sedes');
-        const data = await response.json();
+  //Esto crea un array que referencia al objeto que hemos creado (Sedes), el array se llamara sedes, pone ([]) Porque empezara vacio 
 
-        // Verificamos que la API realmente devuelve un array
-        if (Array.isArray(data)) {
-          this.sedes = data;
-        } else {
-          console.error("La API no devolvió un array:", data);
-        }
-      } catch (error) {
-        console.error("Error al obtener las sedes:", error);
-      }
-    }
-  }
+  const sedes = ref<Sede[]>([]);
+
+  //En esta variable, guarademos el id, number | null significa que puede ser un número o null, y empezara como null porq empieza vacio (null);
+
+  const selectedSedeId = ref<number | null>(null);
+
+  //Obtener todas las sedes, un fetch normal
+
+  const fetchSedes = async () => {
+    const response = await fetch('https://localhost:7179/api/Sedes');
+    sedes.value = await response.json();
+  };
+
+  //Esta sera la funcion que guarde el idSede, pidiendo un id, y el tipo (numbre)
+
+  const selectSede = (id: number) => {
+
+    //Hace que el valor del array que hemos creado creado sea el id que pide la funcion
+
+    selectedSedeId.value = id; 
+  };
+
+  fetchSedes();
+
+  return { sedes, selectedSedeId, selectSede }; 
 });
