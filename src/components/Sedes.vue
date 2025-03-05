@@ -2,7 +2,7 @@
 import { useSedesStore } from '../stores/SedesStore';
 import TargetCenter from './TargetSedes.vue';
 
-const sedesStore = useSedesStore(); // 🔹 Se carga automáticamente
+const sedesStore = useSedesStore(); // Se carga automáticamente
 </script>
 
 <template>

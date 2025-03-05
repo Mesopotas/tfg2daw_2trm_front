@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-    <div class="layout">
+    <div class="layout" style="background-color: #f3e7dc;">
       <Sedes />
     </div>
-  </template>
+</template>
