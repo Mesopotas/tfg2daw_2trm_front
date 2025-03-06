@@ -1,16 +1,32 @@
 <script setup>
+import { ref } from 'vue';
 import { useAsientoStore } from '@/stores/AsientosStore';
 import { useDisponibilidadesStore } from '@/stores/DisponibilidadesStore';
 
 const asientoStore = useAsientoStore();
 const disponibilidadesStore = useDisponibilidadesStore();
+const fechaSeleccionada = ref(null);
+
+const seleccionarFecha = (fecha) => {
+  fechaSeleccionada.value = fecha;
+};
+
+const comprar = async () => {
+  if (!fechaSeleccionada.value) {
+    alert('Selecciona una fecha primero.');
+    return;
+  }
+  
+  await disponibilidadesStore.cambiarEstadoDisponibilidad(fechaSeleccionada.value);
+  alert('Compra realizada correctamente.');
+  fechaSeleccionada.value = null; // reseteo
+};
 </script>
 
 <template>
   <div class="disponibilidad">
     <h2>Disponibilidad del Asiento</h2>
 
-    <!-- Mostrar el número del asiento seleccionado -->
     <p v-if="asientoStore.asientoSeleccionado">
       Asiento seleccionado: {{ asientoStore.asientoSeleccionado }}
     </p>
@@ -27,7 +43,12 @@ const disponibilidadesStore = useDisponibilidadesStore();
           </tr>
         </thead>
         <tbody>
-          <tr v-for="disponibilidad in disponibilidadesStore.disponibilidades" :key="disponibilidad.idDisponibilidad">
+          <tr 
+            v-for="disponibilidad in disponibilidadesStore.disponibilidades" 
+            :key="disponibilidad.idDisponibilidad"
+            :class="{ seleccionado: fechaSeleccionada === disponibilidad.fecha }"
+            @click="seleccionarFecha(disponibilidad.fecha)"
+          >
             <td>{{ disponibilidad.fecha }}</td>
             <td :class="{ disponible: disponibilidad.estado, ocupado: !disponibilidad.estado }">
               {{ disponibilidad.estado ? 'Disponible' : 'No disponible' }}
@@ -38,6 +59,10 @@ const disponibilidadesStore = useDisponibilidadesStore();
     </div>
 
     <p v-else>No hay disponibilidades para este asiento.</p>
+
+    <button @click="comprar" :disabled="!fechaSeleccionada" class="boton-comprar">
+      Comprar
+    </button>
   </div>
 </template>
 
@@ -66,6 +91,7 @@ const disponibilidadesStore = useDisponibilidadesStore();
   border: 1px solid #ccc;
   padding: 8px;
   text-align: center;
+  cursor: pointer;
 }
 
 .tabla-disponibilidad th {
@@ -81,8 +107,23 @@ const disponibilidadesStore = useDisponibilidadesStore();
   background-color: lightcoral;
 }
 
-.sin-seleccion {
+.seleccionado {
+  background-color: yellow;
+}
+
+.boton-comprar {
+  margin-top: 20px;
+  padding: 10px 20px;
   font-size: 16px;
-  color: red;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.boton-comprar:disabled {
+  background-color: gray;
+  cursor: not-allowed;
 }
 </style>
