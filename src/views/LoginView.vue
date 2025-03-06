@@ -33,7 +33,7 @@ const login = async (event: Event) => {
 <template>
   <div class="login">
     <form class="login__form" @submit="login">
-      <input type="text" v-model="usuario" class="login__input" placeholder="Usuario" required>
+      <input type="text" v-model="usuario" class="login__input" placeholder="Correo" required>
       <input type="password" v-model="password" class="login__input" placeholder="Contraseña" required>
       
       <div v-if="mensajeError" class="login__error">{{ mensajeError }}</div> <!-- v-if quiere decir que si la constante mensajeError tiene datos (es decir algo ha fallado), se mostrará, sino no, es decir que todo habrá funcionado-->
