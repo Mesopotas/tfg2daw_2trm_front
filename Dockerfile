@@ -19,6 +19,7 @@ RUN npm run build
 FROM nginx:alpine as produccion
 
 # Copiar los archivos ya montados en la ruta default del nginx para mostrar las paginas (habrá que crear y cambiar un fichero .conf del nginx para manejar bien las rutas por defecto)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=construccion /app/dist /usr/share/nginx/html
 
 # puerto de la derecha en el docker run, cuando se le añada certificado ssl habrá q cambiarlo al 443
