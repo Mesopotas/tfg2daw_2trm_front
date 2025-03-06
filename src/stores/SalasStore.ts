@@ -19,11 +19,18 @@ export const useSalasStore = defineStore('salas', () => {
       salas.value = [];
       return;
     }
-
+  
+    const url = `https://localhost:7179/api/Salas/search?idsede=${idSede}`;
+    console.log("Intentando obtener salas desde:", url);
+  
     try {
-      const response = await fetch(`https://localhost:7179/api/Salas/search?idsede=${idSede}`);
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error HTTP: ${response.status}`);
+      }
       const data = await response.json();
-
+      console.log("Datos recibidos:", data);
+  
       salas.value = data.map((sala: any) => ({
         idSala: sala.idSala,
         nombre: sala.nombre,
@@ -33,9 +40,10 @@ export const useSalasStore = defineStore('salas', () => {
       }));
     } catch (error) {
       console.error("Error al obtener las salas:", error);
-      salas.value = []; 
+      salas.value = [];
     }
   };
+  
 
   watch(() => sedesStore.selectedSedeId, (newIdSede) => {
     fetchSalas(newIdSede);

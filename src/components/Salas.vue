@@ -1,8 +1,22 @@
 <script setup lang="ts">
+import { watch } from 'vue';
 import { useSalasStore } from '../stores/SalasStore';
+import { useSedesStore } from '../stores/SedesStore';
 import TargetSala from './TargetSala.vue';
 
-const salasStore = useSalasStore(); // Se carga automáticamente
+const salasStore = useSalasStore();
+const sedesStore = useSedesStore();
+
+// Si el usuario cambia de sede o si ya hay una sede seleccionada, actualizar salas
+watch(
+  () => sedesStore.selectedSedeId,
+  (newIdSede) => {
+    if (newIdSede) {
+      salasStore.fetchSalas(newIdSede);
+    }
+  },
+  { immediate: true } // Ejecuta la función inmediatamente con el valor actual de selectedSedeId
+);
 </script>
 
 <template>
@@ -11,7 +25,6 @@ const salasStore = useSalasStore(); // Se carga automáticamente
     <h2 class="salas__titulo">Salas</h2>
     <div class="salas__linea"></div>
 
-    <!-- Si hay salas, mostramos las tarjetas -->
     <div v-if="salasStore.salas.length > 0" class="fila_tarjetas">
       <TargetSala
         v-for="sala in salasStore.salas"
@@ -20,10 +33,10 @@ const salasStore = useSalasStore(); // Se carga automáticamente
       />
     </div>
 
-    <!-- Si no hay salas, mostramos el mensaje -->
     <p v-else>Cargando salas...</p>
   </div>
 </template>
+
 
 <style scoped>
 .salas {
