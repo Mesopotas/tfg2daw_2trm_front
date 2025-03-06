@@ -30,10 +30,11 @@ export const useDetallesReservaStore = defineStore("detallesReserva", {
           if (!response.ok) {
             throw new Error(`Error al crear detalle de reserva para el puesto con el ID ${IdPuestoTrabajo }`);
           }
-
-        }
-
+          const data = await response.json();
+          const IdDetalleReserva = data.IdDetalleReserva; // para recuperar el id del detalle de reserva que se crea
     
-    },
-  },
-});
+          return IdDetalleReserva;   
+        }
+        },
+      },
+    });

@@ -41,6 +41,11 @@ export const useReservasStore = defineStore("reservas", {
         throw new Error("Error al crear la reserva.");
       }
 
+      const data = await response.json();
+      const idReserva = data.idReserva; // para recuperar el id de la reserva que se crea
+
+      return idReserva;   
+    }
     },
   },
-});
+);
