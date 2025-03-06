@@ -11,47 +11,30 @@ interface Sala {
 }
 
 export const useSalasStore = defineStore('salas', () => {
-
-  //Esto crea un array que referencia al objeto que hemos creado (Sedes), el array se llamara sedes, pone ([]) Porque empezara vacio 
-
   const salas = ref<Sala[]>([]);
+  const selectedSalaId = ref<number | null>(null);
+  const sedesStore = useSedesStore(); // 🔹 Importamos el store de sedes
 
-  //Llamamos al store de sedes para tener el id guardado
-
-  const sedesStore = useSedesStore();
-  
-   //En esta variable, guarademos el id, number | null significa que puede ser un número o null, y empezara como null porq empieza vacio (null);
-
+  // 🔹 Función para obtener las salas de una sede
   const fetchSalas = async (idSede: number | null) => {
-
-  //Si idSede es null vaciamos las salas
-
     if (!idSede) {
+      console.warn("⚠️ No se ha seleccionado ninguna sede.");
       salas.value = [];
+      selectedSalaId.value = null; // 🔹 Reiniciar sala seleccionada si cambia la sede
       return;
     }
-  
+
     const url = `https://localhost:7179/api/Salas/search?idsede=${idSede}`;
-    console.log("Intentando obtener salas desde:", url);
-  
+    console.log("🌍 Intentando obtener salas desde:", url);
+
     try {
-
-      //Esperamos a que haga el fetch a la url
-
       const response = await fetch(url);
-
-      //Si da error saldra
-
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
-
-      //Pasa todo a json
+      if (!response.ok) throw new Error(`❌ Error HTTP: ${response.status}`);
 
       const data = await response.json();
-      console.log("Datos recibidos:", data);
-  
-      //Transformamos los datos de la API en objetos Sala con la estructura correcta, el || placeholder es porq no tenemos ninguna y asi muestra algo aunque sea
+      if (!data || !Array.isArray(data)) {
+        throw new Error("⚠️ Respuesta inesperada de la API.");
+      }
 
       salas.value = data.map((sala: any) => ({
         idSala: sala.idSala,
@@ -61,19 +44,27 @@ export const useSalasStore = defineStore('salas', () => {
         bloqueado: sala.bloqueado,
       }));
 
-      //Si da error saldra
-
+      console.log("✅ Salas recibidas:", salas.value);
     } catch (error) {
-      console.error("Error al obtener las salas:", error);
+      console.error("❌ Error al obtener las salas:", error);
       salas.value = [];
     }
   };
-  
-  //Esto observa para que cada vez que seleccionamos una sede distinta, cambie
 
+  // 🔹 Función para seleccionar una sala
+  const selectSala = (id: number) => {
+    if (!salas.value.some(sala => sala.idSala === id)) {
+      console.warn(`⚠️ Sala con ID ${id} no encontrada en las salas cargadas.`);
+      return;
+    }
+    selectedSalaId.value = id;
+    console.log("🏢 Sala seleccionada:", id);
+  };
+
+  // 🔹 Observar cambios en la sede seleccionada y actualizar salas
   watch(() => sedesStore.selectedSedeId, (newIdSede) => {
     fetchSalas(newIdSede);
-  });
+  }, { immediate: true }); // 🔹 Ejecutar la primera vez también
 
-  return { salas, fetchSalas };
+  return { salas, selectedSalaId, selectSala, fetchSalas };
 });
