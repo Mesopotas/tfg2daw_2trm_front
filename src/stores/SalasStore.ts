@@ -18,7 +18,7 @@ export const useSalasStore = defineStore('salas', () => {
   // 🔹 Función para obtener las salas de una sede
   const fetchSalas = async (idSede: number | null) => {
     if (!idSede) {
-      console.warn("⚠️ No se ha seleccionado ninguna sede.");
+      console.warn(" No se ha seleccionado ninguna sede.");
       salas.value = [];
       selectedSalaId.value = null; // 🔹 Reiniciar sala seleccionada si cambia la sede
       return;
@@ -29,11 +29,11 @@ export const useSalasStore = defineStore('salas', () => {
 
     try {
       const response = await fetch(url);
-      if (!response.ok) throw new Error(`❌ Error HTTP: ${response.status}`);
+      if (!response.ok) throw new Error(` Error HTTP: ${response.status}`);
 
       const data = await response.json();
       if (!data || !Array.isArray(data)) {
-        throw new Error("⚠️ Respuesta inesperada de la API.");
+        throw new Error(" Respuesta inesperada de la API.");
       }
 
       salas.value = data.map((sala: any) => ({
@@ -44,27 +44,27 @@ export const useSalasStore = defineStore('salas', () => {
         bloqueado: sala.bloqueado,
       }));
 
-      console.log("✅ Salas recibidas:", salas.value);
+      console.log("Salas recibidas:", salas.value);
     } catch (error) {
-      console.error("❌ Error al obtener las salas:", error);
+      console.error(" Error al obtener las salas:", error);
       salas.value = [];
     }
   };
 
-  // 🔹 Función para seleccionar una sala
+  // Función para seleccionar una sala
   const selectSala = (id: number) => {
     if (!salas.value.some(sala => sala.idSala === id)) {
-      console.warn(`⚠️ Sala con ID ${id} no encontrada en las salas cargadas.`);
+      console.warn(` Sala con ID ${id} no encontrada en las salas cargadas.`);
       return;
     }
     selectedSalaId.value = id;
     console.log("🏢 Sala seleccionada:", id);
   };
 
-  // 🔹 Observar cambios en la sede seleccionada y actualizar salas
+  //  Observar cambios en la sede seleccionada y actualizar salas
   watch(() => sedesStore.selectedSedeId, (newIdSede) => {
     fetchSalas(newIdSede);
-  }, { immediate: true }); // 🔹 Ejecutar la primera vez también
+  }, { immediate: true }); // Ejecutar la primera vez también
 
   return { salas, selectedSalaId, selectSala, fetchSalas };
 });
