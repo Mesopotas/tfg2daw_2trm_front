@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { watch } from 'vue';
 import { useSalasStore } from '../stores/SalasStore';
 import { useSedesStore } from '../stores/SedesStore';
 import TargetSala from './TargetSala.vue';
@@ -7,16 +6,8 @@ import TargetSala from './TargetSala.vue';
 const salasStore = useSalasStore();
 const sedesStore = useSedesStore();
 
-// Si el usuario cambia de sede o si ya hay una sede seleccionada, actualizar salas
-watch(
-  () => sedesStore.selectedSedeId,
-  (newIdSede) => {
-    if (newIdSede) {
-      salasStore.fetchSalas(newIdSede);
-    }
-  },
-  { immediate: true } // Ejecuta la función inmediatamente con el valor actual de selectedSedeId
-);
+// Ejecutar fetchSalas automáticamente cuando cambie selectedSedeId asi cada vez que vayamos atra y demos en otro cambiara
+salasStore.fetchSalas(sedesStore.selectedSedeId);
 </script>
 
 <template>
