@@ -1,16 +1,3 @@
-<template>
-  <div class="sala">
-
-    <p v-if="!salaStore.salaSeleccionada">Cargando ...</p>
-
-    <DisposicionSala 
-      v-if="salaStore.salaSeleccionada"
-      :puestos="salaStore.salaSeleccionada.puestos || []" 
-      :zonas="salaStore.salaSeleccionada.zona || []" 
-    />
-  </div>
-</template>
-
 <script setup>
 import { onMounted } from 'vue';
 import { useSalaStore } from '@/stores/salaStore';
@@ -18,13 +5,20 @@ import DisposicionSala from '@/components/DisposicionSala.vue';
 
 const salaStore = useSalaStore();
 
-// 🔹 Cargar la sala con el ID seleccionado en SalaStore
-onMounted(() => {
-  if (salaStore.salaSeleccionada) {
-    console.log("✅ Datos iniciales de la sala:", salaStore.salaSeleccionada);
-  }
-});
 </script>
+
+<template>
+  <div class="sala">
+
+    <p v-if="!salaStore.salaSeleccionada">Cargando ...</p>
+
+    <DisposicionSala 
+      v-if="salaStore.salaSeleccionada"
+      :puestos="salaStore.salaSeleccionada.puestos" 
+      :zonas="salaStore.salaSeleccionada.zona" 
+    />
+  </div>
+</template>
 
 <style scoped>
 .sala {
