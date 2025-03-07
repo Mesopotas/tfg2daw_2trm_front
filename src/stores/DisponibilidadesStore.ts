@@ -2,10 +2,13 @@ import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { useAsientoStore } from './AsientosStore'; // Importamos AsientosStore
 import { useDetallesReservaStore } from './DetallesReservaStores'; // Importamos DetallesReservaStore
+import { useReservasStore } from './ReservasStore'; // Importamos DetallesReservaStore
 
 export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
   const asientoStore = useAsientoStore(); // Accedemos al store de asientos
   const detallesReservaStore = useDetallesReservaStore(); // Accedemos al store de detalles de reservas
+  const reservasStore = useReservasStore(); // Accedemos al store de reservas
+
   const disponibilidades = ref<any[]>([]);
 
   const fetchDisponibilidades = async () => {
@@ -70,6 +73,20 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
         console.log("Reserva creada con ID:", idDetalleReserva);
       } else {
         console.warn("No se pudo crear la reserva.");
+      }
+
+      const descripcion = "Descripción de la reserva";
+      const idPuestoTrabajo = asientoStore.asientoSeleccionado;
+
+      if (idPuestoTrabajo !== null) {
+        try {
+          const idReserva = await reservasStore.createReserva(token, descripcion, idPuestoTrabajo);
+          console.log("Reserva creada con ID:", idReserva);
+        } catch (errorReserva) {
+          console.error("Error al crear la reserva:", errorReserva);
+        }
+      } else {
+        console.warn("El ID de puesto de trabajo es null.");
       }
 
       await fetchDisponibilidades(); // Recargar la lista

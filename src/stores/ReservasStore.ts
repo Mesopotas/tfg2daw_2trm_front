@@ -4,9 +4,7 @@ import { UserStore } from "./UserStore"; // Importamos la store de usuario
 interface Reserva {
   IdReserva: number;
   IdUsuario: number;
-  Fecha: string;
   Descripcion: string;
-  PrecioTotal: number;
 }
 
 export const useReservasStore = defineStore("reservas", {
@@ -15,37 +13,43 @@ export const useReservasStore = defineStore("reservas", {
   }),
 
   actions: {
-    async createReserva(token: string, descripcion: string, precioTotal: number) {
+    async createReserva(token: string, descripcion: string, idPuestoTrabajo: number) {
       const userStore = UserStore();
-      const idUsuario = userStore.user?.idUsuario; // se le asigna el id de usuario previamente almacenado en su store
+    
 
+      const idUsuario = userStore.user?.idUsuario;
+    
       if (!idUsuario) {
-        throw new Error("No se ha iniciado sesion");
+        throw new Error("No se ha iniciado sesión correctamente");
       }
-
+    
+      const requestBody = {
+        idUsuario: idUsuario,
+        descripcion: descripcion,
+        idPuestoTrabajo: idPuestoTrabajo
+      };
+    
+      console.log("Enviando datos de reserva:", requestBody);
+    
       const response = await fetch("https://localhost:7179/api/Reservas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          IdUsuario: idUsuario,
-          Fecha: new Date().toISOString(),
-          Descripcion: descripcion,
-          PrecioTotal: precioTotal,
-        }),
+        body: JSON.stringify(requestBody),
       });
-
+    
       if (!response.ok) {
-        throw new Error("Error al crear la reserva.");
+        const errorData = await response.text();
+        throw new Error(`Error al crear la reserva: ${response.status} - ${errorData}`);
       }
-
+    
       const data = await response.json();
       const idReserva = data.idReserva; // para recuperar el id de la reserva que se crea
-
-      return idReserva;   
+    
+      return idReserva;
     }
-    },
+    
   },
-);
+});
