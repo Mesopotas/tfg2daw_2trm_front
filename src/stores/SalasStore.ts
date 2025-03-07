@@ -11,60 +11,46 @@ interface Sala {
 }
 
 export const useSalasStore = defineStore('salas', () => {
+
+  //Esto crea un array que referencia al objeto que hemos creado (Salas), el array se llamara salas, pone ([]) Porque empezara vacio 
+
   const salas = ref<Sala[]>([]);
+
+  //En esta variable, guarademos el id, number | null significa que puede ser un número o null, y empezara como null porq empieza vacio (null);
+
   const selectedSalaId = ref<number | null>(null);
-  const sedesStore = useSedesStore(); // 🔹 Importamos el store de sedes
 
-  // 🔹 Función para obtener las salas de una sede
+  //Llama a store de sedes, para tener guardado el id de lo que hemos clickado guardado
+
+  const sedesStore = useSedesStore();
+
   const fetchSalas = async (idSede: number | null) => {
+
+    //Si idSede esta vacio, reincicia la lista y resetea su valor
+
     if (!idSede) {
-      console.warn(" No se ha seleccionado ninguna sede.");
       salas.value = [];
-      selectedSalaId.value = null; // 🔹 Reiniciar sala seleccionada si cambia la sede
+      selectedSalaId.value = null;
       return;
     }
 
-    const url = `https://localhost:7179/api/Salas/search?idsede=${idSede}`;
-    console.log("🌍 Intentando obtener salas desde:", url);
+    //Peticion Fetch
 
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(` Error HTTP: ${response.status}`);
-
-      const data = await response.json();
-      if (!data || !Array.isArray(data)) {
-        throw new Error(" Respuesta inesperada de la API.");
-      }
-
-      salas.value = data.map((sala: any) => ({
-        idSala: sala.idSala,
-        nombre: sala.nombre,
-        urL_Imagen: sala.urL_Imagen || "https://via.placeholder.com/100",
-        capacidad: sala.capacidad,
-        bloqueado: sala.bloqueado,
-      }));
-
-      console.log("Salas recibidas:", salas.value);
-    } catch (error) {
-      console.error(" Error al obtener las salas:", error);
-      salas.value = [];
-    }
+    const response = await fetch(`https://localhost:7179/api/Salas/search?idsede=${idSede}`);
+    salas.value = await response.json();
   };
 
-  // Función para seleccionar una sala
-  const selectSala = (id: number) => {
-    if (!salas.value.some(sala => sala.idSala === id)) {
-      console.warn(` Sala con ID ${id} no encontrada en las salas cargadas.`);
-      return;
-    }
-    selectedSalaId.value = id;
-    console.log("🏢 Sala seleccionada:", id);
-  };
 
-  //  Observar cambios en la sede seleccionada y actualizar salas
-  watch(() => sedesStore.selectedSedeId, (newIdSede) => {
-    fetchSalas(newIdSede);
-  }, { immediate: true }); // Ejecutar la primera vez también
+  //Recibe el ID de una sala y lo guarda en selectedSalaId.
+
+
+  const selectSala = (id: number) => selectedSalaId.value = id;
+
+  //Cada vez que hay un cambio en selectedSedeId llama a fetchSalas para q muestre la nueva info
+
+  watch(() => sedesStore.selectedSedeId, fetchSalas, { immediate: true });
+
+  //Lo que devuelve
 
   return { salas, selectedSalaId, selectSala, fetchSalas };
 });
