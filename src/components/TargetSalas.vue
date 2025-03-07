@@ -4,6 +4,8 @@ import { useSalasStore } from '../stores/SalasStore';
 
 const salasStore = useSalasStore();
 
+//Define el prop para guardar la info
+
 const props = defineProps<{
   idSala?: number;
   nombre?: string;
@@ -12,14 +14,17 @@ const props = defineProps<{
   bloqueado?: boolean;
 }>();
 
-// 🔹 Función para manejar el clic en la tarjeta
 const handleClick = () => {
+
+  //Si no existe, o no es null el props para la funcion
+
   if (!props.idSala) {
-    console.warn("⚠️ Intento de seleccionar una sala sin ID.");
+    console.warn("Intento de seleccionar una sala sin ID.");
     return;
   }
 
-  console.log("🖱 Click en la tarjeta de la sala:", props.idSala);
+  //Pero si existe, llama a la funcion de selectSala para guardar el Id
+
   salasStore.selectSala(props.idSala);
 };
 </script>
