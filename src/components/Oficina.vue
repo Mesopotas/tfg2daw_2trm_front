@@ -43,40 +43,19 @@ export default {
 <style lang="scss" scoped>
 .oficina {
   position: relative;
-  height: calc(100vh - 80px - 123px);
-  margin: 0;
-  padding: 0;
+  height: calc(100vh - 123px);
   overflow: hidden;
 }
 
-.oficina__carousel {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
-}
-
-.oficina__carousel-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.oficina__carousel-item {
-  width: 100%;
-  height: 100%;
-}
-
+.oficina__carousel,
+.oficina__carousel-container,
+.oficina__carousel-item,
 .v-img {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .oficina__title {
@@ -86,9 +65,9 @@ export default {
   transform: translateX(-50%);
   font-family: jaro, sans-serif;
   font-weight: bold;
-  font-size: 35px;
+  font-size: 25px;
   color: #3a9d64;
-  background: #e7e7e7;
+  background: rgba(255, 255, 255, 0.3);
   padding: 10px 20px;
   border-radius: 10px;
   z-index: 1;
@@ -96,23 +75,23 @@ export default {
 
 .oficina__description {
   position: absolute;
-  top: 40%;
+  top: 35%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  font-size: 15px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  font-size: 12px;
   color: #000;
   text-align: justify;
-  max-width: 80%;
-  max-height: 50%;
+  max-width: 90%;
+  max-height: 45%;
   overflow-y: auto;
   z-index: 1;
 }
 
 .oficina__button-container {
   position: absolute;
-  bottom: 5%;
+  bottom: 3%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -121,54 +100,28 @@ export default {
 .oficina__button {
   background-color: #3a9d64;
   color: #000;
-  font-size: 18px;
-  padding: 12px 24px;
+  font-size: 16px;
+  padding: 10px 20px;
   border-radius: 8px;
-  min-width: 140px;
-  min-height: 45px;
+  min-width: 120px;
+  min-height: 40px;
   white-space: nowrap;
 }
 
-@media (max-width: 620px) {
-  .oficina__title {
-    font-size: 25px;
-  }
-
-  .oficina__description {
-    font-size: 12px;
-    padding: 10px;
-    max-width: 90%;
-    top: 35%;
-    max-height: 45%;
-  }
-
-  .oficina__button-container {
-    bottom: 3%;
-  }
-
-  .oficina__button {
-    font-size: 16px;
-    padding: 10px 20px;
-    min-width: 120px;
-    min-height: 40px;
-  }
-}
-
 @media (min-width: 768px) {
+  .oficina{
+    height: calc(100vh - 75px);
+  }
   .oficina__title {
     font-size: 50px;
   }
-
   .oficina__description {
     font-size: 16px;
     max-width: 70%;
-    max-height: 50%;
   }
-
   .oficina__button-container {
     bottom: 6%;
   }
-
   .oficina__button {
     font-size: 20px;
     padding: 15px 30px;
@@ -178,20 +131,20 @@ export default {
 }
 
 @media (min-width: 1024px) {
+  .oficina{
+  height: calc(100vh - 80px);
+  }
   .oficina__title {
     font-size: 70px;
+    top: 10%;
   }
-
   .oficina__description {
     font-size: 18px;
     max-width: 60%;
-    max-height: 50%;
   }
-
   .oficina__button-container {
     bottom: 8%;
   }
-
   .oficina__button {
     font-size: 22px;
     padding: 12px 28px;
@@ -199,4 +152,19 @@ export default {
     min-height: 65px;
   }
 }
+
+@media (min-width:360px) and (max-width:450px){
+
+  .oficina__title{
+    top: 15%;
+  }  
+
+  .oficina__description{
+    top: 25%;
+    max-height: 100%;
+  }
+
+}
+
+
 </style>
