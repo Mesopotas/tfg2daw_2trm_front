@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, watch } from 'vue';
 import { useAsientoStore } from './AsientosStore'; // Importamos AsientosStore
 import { useDetallesReservaStore } from './DetallesReservaStores'; // Importamos DetallesReservaStore
-import { useReservasStore } from './ReservasStore'; // Importamos DetallesReservaStore
+import { useReservasStore } from './ReservasStore'; // Importamos ReservasStore
 
 export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
   const asientoStore = useAsientoStore(); // Accedemos al store de asientos
@@ -40,7 +40,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       console.warn("No hay asiento seleccionado para cambiar disponibilidad.");
       return;
     }
-
+      // validar que haya disponibilidad
     const disponibilidad = disponibilidades.value.find(d => d.fecha === fechaSeleccionada);
     if (!disponibilidad) {
       console.warn("No se encontró disponibilidad para la fecha seleccionada.");
@@ -48,12 +48,11 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
     }
 
     const urlPut = `https://localhost:7179/api/Disponibilidades/${disponibilidad.idDisponibilidad}`;
-    console.log("Realizando PUT a:", urlPut);
 
-    const bodyPut = {
+    const bodyPut = { // usamos la data del store de disponibilidades
       idDisponibilidad: disponibilidad.idDisponibilidad,
       fecha: disponibilidad.fecha,
-      estado: !disponibilidad.estado,
+      estado: !disponibilidad.estado, // el contrario al estado actual, aun asi el back siempre lo pondrá en false
       idTramoHorario: disponibilidad.idTramoHorario
     };
 
@@ -70,17 +69,18 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       // Hacer POST a DetallesReservas
       const idDetalleReserva = await detallesReservaStore.createDetallesReserva(token, [idAsiento]);
       if (idDetalleReserva) {
-        console.log("Reserva creada con ID:", idDetalleReserva);
+        console.log("Reserva creada con ID:", idDetalleReserva); // para depurar y confirmar que todo va bien
       } else {
         console.warn("No se pudo crear la reserva.");
       }
 
-      const descripcion = "Descripción de la reserva";
+      const descripcion = "Descripción de la reserva"; // descripcion fija
       const idPuestoTrabajo = asientoStore.asientoSeleccionado;
 
       if (idPuestoTrabajo !== null) {
         try {
-          const idReserva = await reservasStore.createReserva(token, descripcion, idPuestoTrabajo);
+          // post a reservas
+          const idReserva = await reservasStore.createReserva(descripcion, idPuestoTrabajo);
           console.log("Reserva creada con ID:", idReserva);
         } catch (errorReserva) {
           console.error("Error al crear la reserva:", errorReserva);

@@ -20,7 +20,7 @@ export const useDetallesReservaStore = defineStore("detallesReserva", {
         // info que se va a mandar en el cuerpo de la peticion POST
         const payload = {
           IdPuestoTrabajo,
-          descripcion,
+          descripcion, // el resto de data la autocompleta el backend
         };
 
 

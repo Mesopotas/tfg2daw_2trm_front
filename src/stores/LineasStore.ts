@@ -19,7 +19,7 @@ export const useLineasStore = defineStore("lineas", {
       const detallesReservaStore = useDetallesReservaStore();
       const reservaStore = useReservasStore();
 
-      const idReserva = reservaStore.reservas[0]?.IdReserva; // del array de datos de reservas, el elemento de posicion 1 (0 index) que corresponde al id generado de reserva
+      const idReserva = reservaStore.reservas[0]?.idReserva; // del array de datos de reservas, el elemento de posicion 1 (0 index) que corresponde al id generado de reserva
       const IdDetalleReserva = detallesReservaStore.detalles[0]?.IdDetalleReserva; // lo mismo que arriba con el id de detalle reserva
 
       if (!token) {

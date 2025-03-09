@@ -13,7 +13,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { useSalaStore } from '@/stores/salaStore';
+import { useSalaStore } from '@/stores/SalaStore';
 import DisposicionSala from '@/components/DisposicionSala.vue';
 
 const salaStore = useSalaStore();
