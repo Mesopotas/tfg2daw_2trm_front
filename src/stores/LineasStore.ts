@@ -5,7 +5,7 @@ import { useReservasStore } from "./ReservasStore";
 interface LineaReserva {
   IdLinea: number;
   IdReserva: number;
-  IdDetalleReserva: number;
+  IdDetalleReserva: number[];
   Precio: number;
 }
 
@@ -36,7 +36,16 @@ export const useLineasStore = defineStore("lineas", {
         return;
       }
 
-      console.log("Reserva creada con ID:", idDetalleReserva);
+      console.log("Reserva creada con ID:", idReserva);
+
+      // Asegurarse de que los detalles de la reserva estén disponibles
+      if (detallesReservaStore.detalles.length === 0) {
+        console.warn("No se encontraron detalles de reserva.");
+        return;
+      }
+
+      const reserva = reservaStore.reservas[0];  // Acceder al primer elemento del arreglo
+      const detalleReserva = detallesReservaStore.detalles[0]; // Tomamos el primer detalle
 
       // Crear línea de reserva con los IDs obtenidos
       const response = await fetch("https://localhost:7179/api/Lineas", {
@@ -46,8 +55,8 @@ export const useLineasStore = defineStore("lineas", {
           "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          IdReserva: idReserva,
-          IdDetalleReserva: idDetalleReserva,
+          IdReserva: reserva.idReserva,
+          IdDetalleReserva: detalleReserva.IdDetalleReserva, // Usamos el primer ID
           Descripcion: descripcion,
           PrecioTotal: precioTotal,
         }),

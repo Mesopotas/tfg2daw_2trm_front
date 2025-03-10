@@ -13,16 +13,17 @@ export const useDetallesReservaStore = defineStore("detallesReserva", {
 
   actions: {
     async createDetallesReserva(token: string, puestos: number[]) {
-      this.detalles = [];
+      this.detalles = []; // Limpiar la lista de detalles antes de agregar nuevos
+
+      const idDetalleReserva: number[] = []; // Array para almacenar los IdDetalleReserva generados
 
       for (const IdPuestoTrabajo of puestos) {
         const descripcion = `Compra al asiento de id ${IdPuestoTrabajo}`;
-        // info que se va a mandar en el cuerpo de la peticion POST
+        // Datos que se enviarán en el cuerpo de la solicitud POST
         const payload = {
           IdPuestoTrabajo,
-          descripcion, // el resto de data la autocompleta el backend
+          descripcion, // El backend completa el resto de los datos
         };
-
 
         const response = await fetch("https://localhost:7179/api/DetallesReservas", {
           method: "POST",
@@ -42,8 +43,19 @@ export const useDetallesReservaStore = defineStore("detallesReserva", {
         const data = await response.json();
         const IdDetalleReserva = data.IdDetalleReserva;
 
-        return IdDetalleReserva;
+        // Almacenar el detalle en el estado
+        this.detalles.push({
+          IdDetalleReserva,
+          IdPuestoTrabajo,
+          fechaCreacion: new Date().toISOString(),
+        });
+
+        // Agregar el IdDetalleReserva al array para retornarlo al final
+        idDetalleReserva.push(IdDetalleReserva);
       }
+
+      // Retornar todos los IdDetalleReserva generados
+      return idDetalleReserva;
     },
   },
 });
