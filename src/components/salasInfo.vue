@@ -1,5 +1,5 @@
 <template>
-  <v-container class="salasInfo">
+  <v-container class="salasInfo" id="salaInfo-id">
     <h2 class="salasInfo__title">salasInfo</h2>
 
     <div class="salasInfo__content">

@@ -1,5 +1,5 @@
 <template>
-  <div class="oficina">
+  <div class="oficina" id="oficina-id">
     <v-carousel hide-delimiters class="oficina__carousel" height="100%">
       <v-carousel-item v-for="(image, index) in images" :key="index" class="oficina__carousel-item">
         <v-img :src="image" height="100%" cover />

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="about">
+  <v-container class="about" id="about-if">
     <v-row justify="center">
       <v-col>
         <h1 class="about__header">¿Quiénes somos?</h1>
