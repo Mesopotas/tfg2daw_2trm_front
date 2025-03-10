@@ -14,7 +14,7 @@ export default defineComponent({});
             <nav class="nav-bar__menu">
                 <a href="#" class="nav-bar__link">Espacios</a>
                 <a href="#" class="nav-bar__link">Quienes Somos</a>
-                <a href="#" class="nav-bar__link">Tarifas</a>
+                <a href="#" class="nav-bar__link">salasInfo</a>
             </nav>
             <router-link to="login"> <div class="nav-bar__circle"></div></router-link>
 

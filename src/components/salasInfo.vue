@@ -1,35 +1,35 @@
 <template>
-  <v-container class="tarifas">
-    <h2 class="tarifas__title">Tarifas</h2>
+  <v-container class="salasInfo">
+    <h2 class="salasInfo__title">salasInfo</h2>
 
-    <div class="tarifas__content">
-      <v-card class="tarifas__card">
-        <v-img class="tarifas__image" src="https://placehold.co/800x700"></v-img>
-        <v-card-text class="tarifas__text">
-          <p class="tarifas__name">LOREM</p>
-          <p class="tarifas__description">
+    <div class="salasInfo__content">
+      <v-card class="salasInfo__card">
+        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
+        <v-card-text class="salasInfo__text">
+          <p class="salasInfo__name">LOREM</p>
+          <p class="salasInfo__description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
             Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
           </p>
         </v-card-text>
       </v-card>
 
-      <v-card class="tarifas__card">
-        <v-img class="tarifas__image" src="https://placehold.co/800x700"></v-img>
-        <v-card-text class="tarifas__text">
-          <p class="tarifas__name">LOREM</p>
-          <p class="tarifas__description">
+      <v-card class="salasInfo__card">
+        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
+        <v-card-text class="salasInfo__text">
+          <p class="salasInfo__name">LOREM</p>
+          <p class="salasInfo__description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
             Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
           </p>
         </v-card-text>
       </v-card>
 
-      <v-card class="tarifas__card">
-        <v-img class="tarifas__image" src="https://placehold.co/800x700"></v-img>
-        <v-card-text class="tarifas__text">
-          <p class="tarifas__name">LOREM</p>
-          <p class="tarifas__description">
+      <v-card class="salasInfo__card">
+        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
+        <v-card-text class="salasInfo__text">
+          <p class="salasInfo__name">LOREM</p>
+          <p class="salasInfo__description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
             Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
           </p>
@@ -40,9 +40,9 @@
 </template>
 
 <style lang="scss" scoped>
-.tarifas {
+.salasInfo {
   min-width: 100%;
-  min-height: calc(100vh - 107px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +104,8 @@
 }
 
 @media (min-width: 1024px) {
-  .tarifas {
+  .salasInfo {
+    height: 100vh;
     &__content {
       flex-direction: row;
       justify-content: center;

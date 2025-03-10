@@ -43,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .oficina {
   position: relative;
-  height: calc(100vh - 123px);
+  height: 100vh ;
   overflow: hidden;
 }
 
@@ -110,7 +110,7 @@ export default {
 
 @media (min-width: 768px) {
   .oficina{
-    height: calc(100vh - 75px);
+    height: 100vh;
   }
   .oficina__title {
     font-size: 50px;
@@ -132,7 +132,7 @@ export default {
 
 @media (min-width: 1024px) {
   .oficina{
-  height: calc(100vh - 80px);
+    height: 100vh;
   }
   .oficina__title {
     font-size: 70px;

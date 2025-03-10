@@ -29,7 +29,7 @@
 
 <style lang="scss" scoped>
 .about {
-  height: calc(100vh + 90px);
+  height: 100vh;
   width: 100%;
   display: flex;
   min-width: 100%;
@@ -151,6 +151,7 @@
 
 @media (min-width: 1024px) {
   .about {
+    height: 100vh;
     &__content {
       width: 100%;
       padding: 20px;

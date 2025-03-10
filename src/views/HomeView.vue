@@ -1,13 +1,13 @@
 <script lang="ts">
 import SobreNosotros from '../components/SobreNosotros.vue';
-import Tarifas from '../components/Tarifas.vue';
+import salasInfo from '../components/salasInfo.vue';
 import Oficina from '../components/Oficina.vue';
 
 export default {
   components: {
     Oficina,
     SobreNosotros,
-    Tarifas,
+    salasInfo,
   },
 };
 </script>
@@ -16,7 +16,7 @@ export default {
   <div class="layout">
     <Oficina />
     <SobreNosotros />
-    <Tarifas />
+    <salasInfo />
   </div>
 </template>
 
