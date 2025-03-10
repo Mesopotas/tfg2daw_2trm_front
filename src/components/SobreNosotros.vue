@@ -8,7 +8,7 @@
     <v-divider></v-divider>
     <v-row class="about__content">
       <v-col class="about__image-col">
-        <v-img class="about__image" src="https://placehold.co/1700x1200" height="100%" cover></v-img>
+        <img class="about__image" src="../assets/imgs/jefes-lideres.jpg" height="100%" cover><img>
       </v-col>
       <v-col class="about__text-col">
         <h2 class="about__sub-title">LOREM</h2>
@@ -36,7 +36,7 @@
   justify-content: center;
   padding-left: 7%;
   padding-right: 10%;
-  background-color: #f4f4f4;
+  background-color: #EDE0D4;
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -49,13 +49,18 @@
     color: #3a9d64;
     text-align: center;
     margin-top: 20%;
-    margin-bottom: 20px;
+    margin-bottom: 75px;
   }
 
   &__content {
     flex-direction: column;
     text-align: center;
     align-content: space-around;
+    box-shadow: 7px 7px 12px 0 rgba(0, 0, 0, 0.15);
+    border: 1px solid #C2C6C8 !important;
+    border-radius: 20px;
+    background: white;
+    margin-bottom: 50px;
   }
 
   &__image-col {
@@ -86,7 +91,7 @@
   &__description {
     margin-top: 2%;
     background: transparent;
-    padding: 20px;
+    padding: 20px 20px 20px 0;
     font-size: 16px;
     color: #000000;
     text-align: justify;
@@ -106,6 +111,8 @@
       flex-direction: row;
       height: 100%;
       padding: 20px;
+      margin-bottom: 100px;
+        
     }
 
     &__image-col {
@@ -132,7 +139,7 @@
       font-size: 50px;
       padding-top: 5%;
       margin-top: 10%;
-      margin-bottom: 20px;
+      margin-bottom: 100px;
     }
 
     &__sub-title {
@@ -142,7 +149,7 @@
 
     &__description {
       font-size: 16px;
-      padding: 15px;
+      padding: 15px 15px 15px 0;
       margin-top: 2%;
       text-align: left;
     }
@@ -155,6 +162,7 @@
     &__content {
       width: 100%;
       padding: 20px;
+      margin-bottom: 100px;
     }
 
     &__image-col {
@@ -178,7 +186,7 @@
       font-size: 70px;
       padding-top: 5%;
       margin-top: 10%;
-      margin-bottom: 20px;
+      margin-bottom: 100px;
     }
 
     &__sub-title {
@@ -189,9 +197,10 @@
 
     &__description {
       font-size: 16px;
-      padding: 20px;
+      padding: 20px 20px 20px 0;
       margin-top: 2%;
       text-align: left;
+      
     }
   }
 }
