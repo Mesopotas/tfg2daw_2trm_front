@@ -12,9 +12,9 @@ export default defineComponent({});
         <div class="nav-bar__container">
             <router-link to="home"> <h1 class="nav-bar__logo">La Oficina</h1></router-link>
             <nav class="nav-bar__menu">
-                <a href="#" class="nav-bar__link">Espacios</a>
-                <a href="#" class="nav-bar__link">Quienes Somos</a>
-                <a href="#" class="nav-bar__link">salasInfo</a>
+                <a href="/home#oficina-id" class="nav-bar__link">Espacios</a>
+                <a href="/home#about-if" class="nav-bar__link">Quienes Somos</a>
+                <a href="/home#salaInfo-id" class="nav-bar__link">salasInfo</a>
             </nav>
             <router-link to="login"> <div class="nav-bar__circle"></div></router-link>
 
