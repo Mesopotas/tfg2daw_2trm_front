@@ -1,43 +1,31 @@
 <template>
   <v-container class="salasInfo" id="salaInfo-id">
-    <h2 class="salasInfo__title">salasInfo</h2>
+    <h2 class="salasInfo__title">Nuestras Salas</h2>
 
     <div class="salasInfo__content">
       <v-card class="salasInfo__card">
-        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
+        <img class="salasInfo__image" src="../assets/imgs/grupo-grande.png"></img>
         <v-card-text class="salasInfo__text">
-          <p class="salasInfo__name">LOREM</p>
+          <p class="salasInfo__name">Grupal</p>
           <p class="salasInfo__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
-            Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
+            El epicentro de la creatividad y la colaboración. Este espacio está diseñado para reuniones de equipo, sesiones de brainstorming, coworking y networking. Con mesas amplias, pizarra y una atmósfera que inspira el trabajo en conjunto, es el lugar perfecto para compartir ideas y construir algo grande con otros profesionales.
           </p>
         </v-card-text>
       </v-card>
 
       <v-card class="salasInfo__card">
-        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
+        <img class="salasInfo__image" src="../assets/imgs/grupo-privado.png"></img>
         <v-card-text class="salasInfo__text">
-          <p class="salasInfo__name">LOREM</p>
+          <p class="salasInfo__name">Privada</p>
           <p class="salasInfo__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
-            Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
-          </p>
-        </v-card-text>
-      </v-card>
-
-      <v-card class="salasInfo__card">
-        <v-img class="salasInfo__image" src="https://placehold.co/800x700"></v-img>
-        <v-card-text class="salasInfo__text">
-          <p class="salasInfo__name">LOREM</p>
-          <p class="salasInfo__description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pretium mi, vel pharetra lacus.
-            Phasellus id mollis metus. Quisque vestibulum ipsum massa, quis.
+            Un refugio de tranquilidad y enfoque. Pensada para esos momentos en los que necesitas máxima concentración, privacidad o confidencialidad, ya sea para una videollamada importante, una reunión estratégica o simplemente un rato de trabajo sin interrupciones. Aquí puedes desarrollar tus proyectos en un entorno silencioso y cómodo.
           </p>
         </v-card-text>
       </v-card>
     </div>
   </v-container>
 </template>
+
 
 <style lang="scss" scoped>
 .salasInfo {
@@ -46,9 +34,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #F4F4F4;
+  background: url('../assets/imgs/gente-feliz.png') no-repeat center center;
+  background-size: cover;
   padding: 5% 2%;
   box-sizing: border-box;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); // Ajusta la opacidad para mejorar la visibilidad
+    z-index: 1;
+  }
 
   &__title {
     font-family: 'Jaro', sans-serif;
@@ -58,6 +59,8 @@
     margin-bottom: 7%;
     text-transform: uppercase;
     letter-spacing: 2px;
+    position: relative;
+    z-index: 2;
   }
 
   &__content {
@@ -66,16 +69,19 @@
     align-items: center;
     width: 100%;
     min-width: 100%;
+    position: relative;
+    z-index: 2;
   }
 
   &__card {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8); // Hace que las tarjetas sean semitransparentes
     border-radius: 8px;
     padding: 24px;
     text-align: center;
     width: 90%;
     max-width: 350px;
     margin-bottom: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 
   &__image {
@@ -106,6 +112,7 @@
 @media (min-width: 1024px) {
   .salasInfo {
     height: 100vh;
+
     &__content {
       flex-direction: row;
       justify-content: center;
@@ -125,4 +132,5 @@
     }
   }
 }
+
 </style>
