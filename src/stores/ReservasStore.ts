@@ -35,7 +35,7 @@ export const useReservasStore = defineStore("reservas", {
         idPuestoTrabajo: idPuestoTrabajo,
       };
 
-      console.log("Enviando datos de reserva:", requestBody); //depuracion
+      console.log("Enviando datos de reserva:", requestBody); //depuración
 
       const response = await fetch("https://localhost:7179/api/Reservas", {
         method: "POST",
@@ -54,7 +54,20 @@ export const useReservasStore = defineStore("reservas", {
       const data = await response.json();
       const idReserva = data.idReserva; // Recuperamos el ID de la reserva creada
 
-      return idReserva;
+      // Guardar la reserva en el estado
+      this.reservas.push({
+        idReserva,
+        idUsuario: userStore.user.idUsuario,
+        fecha: new Date().toISOString(),
+        descripcion,
+      });
+
+      return idReserva; // Retornar el id de la reserva creada
+    },
+
+    // Acción para obtener todas las reservas
+    getReservas() {
+      return this.reservas;
     },
   },
 });

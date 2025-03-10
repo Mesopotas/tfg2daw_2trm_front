@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { useDetallesReservaStore } from "./DetallesReservaStores";
 import { useReservasStore } from "./ReservasStore";
 
-interface Reserva {
+interface LineaReserva {
   IdLinea: number;
   IdReserva: number;
   IdDetalleReserva: number;
@@ -11,22 +11,35 @@ interface Reserva {
 
 export const useLineasStore = defineStore("lineas", {
   state: () => ({
-    reservas: [] as Reserva[],
+    lineas: [] as LineaReserva[],
   }),
 
   actions: {
-    async createReserva(token: string, descripcion: string, precioTotal: number) {
+    async createLinea(token: string, descripcion: string, precioTotal: number, idAsiento: number) {
       const detallesReservaStore = useDetallesReservaStore();
       const reservaStore = useReservasStore();
-
-      const idReserva = reservaStore.reservas[0]?.idReserva; // del array de datos de reservas, el elemento de posicion 1 (0 index) que corresponde al id generado de reserva
-      const IdDetalleReserva = detallesReservaStore.detalles[0]?.IdDetalleReserva; // lo mismo que arriba con el id de detalle reserva
 
       if (!token) {
         throw new Error("No se ha iniciado sesión");
       }
 
-      const response = await fetch("https://localhost:7179/api/Reservas", {
+      // Crear una reserva y obtener su ID
+      const idReserva = await reservaStore.createReserva(descripcion, 1); // ID puesto como ejemplo
+      if (!idReserva) {
+        throw new Error("No se pudo obtener el ID de la reserva.");
+      }
+
+      // Crear detalles de la reserva y obtener sus IDs
+      const idDetalleReserva = await detallesReservaStore.createDetallesReserva(token, [idAsiento]);
+      if (!idDetalleReserva) {
+        console.warn("No se pudo crear el detalle de la reserva.");
+        return;
+      }
+
+      console.log("Reserva creada con ID:", idDetalleReserva);
+
+      // Crear línea de reserva con los IDs obtenidos
+      const response = await fetch("https://localhost:7179/api/Lineas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,15 +47,28 @@ export const useLineasStore = defineStore("lineas", {
         },
         body: JSON.stringify({
           IdReserva: idReserva,
-          IdDetalleReserva: IdDetalleReserva,
+          IdDetalleReserva: idDetalleReserva,
           Descripcion: descripcion,
           PrecioTotal: precioTotal,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Error al crear la reserva.");
+        const errorData = await response.text();
+        throw new Error(`Error al crear la línea de reserva: ${response.status} - ${errorData}`);
       }
+
+      const data = await response.json();
+      const IdLinea = data.IdLinea;
+
+      this.lineas.push({
+        IdLinea,
+        IdReserva: idReserva,
+        IdDetalleReserva: idDetalleReserva,
+        Precio: precioTotal,
+      });
+
+      console.log("Línea de reserva creada con éxito.");
     },
   },
 });

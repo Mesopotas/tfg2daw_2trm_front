@@ -82,6 +82,21 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
           // post a reservas
           const idReserva = await reservasStore.createReserva(descripcion, idPuestoTrabajo);
           console.log("Reserva creada con ID:", idReserva);
+
+            // añadir en lineasstore y con datos de otras store
+          const postLineas = await fetch("https://localhost:7179/api/Lineas", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              IdReserva: idReserva,
+              IdDetalleReserva: idDetalleReserva,
+              Descripcion: descripcion,
+              PrecioTotal: 11,
+            }),
+          });
         } catch (errorReserva) {
           console.error("Error al crear la reserva:", errorReserva);
         }
@@ -90,11 +105,13 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       }
 
       await fetchDisponibilidades(); // Recargar la lista
+
+
     } catch (error) {
       console.error("Error en cambiarEstadoDisponibilidad:", error);
     }
   };
-
+ 
   watch(
     () => asientoStore.asientoSeleccionado,
     (newIdAsiento) => {
