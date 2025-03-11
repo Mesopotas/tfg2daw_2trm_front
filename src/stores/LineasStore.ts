@@ -5,13 +5,13 @@ import { useReservasStore } from "./ReservasStore";
 interface LineaReserva {
   IdLinea: number;
   IdReserva: number;
-  IdDetalleReserva: number[];
+  IdDetalleReserva: number[];  // Este campo será un arreglo, como lo tenías anteriormente
   Precio: number;
 }
 
 export const useLineasStore = defineStore("lineas", {
   state: () => ({
-    lineas: [] as LineaReserva[],
+    lineas: [] as LineaReserva[] ,
   }),
 
   actions: {
@@ -29,23 +29,32 @@ export const useLineasStore = defineStore("lineas", {
         throw new Error("No se pudo obtener el ID de la reserva.");
       }
 
-      // Crear detalles de la reserva y obtener sus IDs
-      const idDetalleReserva = await detallesReservaStore.createDetallesReserva(token, [idAsiento]);
-      if (!idDetalleReserva) {
-        console.warn("No se pudo crear el detalle de la reserva.");
-        return;
+      // Obtener el último IdDetalleReserva desde la API
+      const lastIdResponse = await fetch("https://localhost:7179/api/DetallesReservas/last", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+
+      if (!lastIdResponse.ok) {
+        const errorData = await lastIdResponse.text();
+        throw new Error(`Error al obtener el último IdDetalleReserva: ${lastIdResponse.status} - ${errorData}`);
       }
 
-      console.log("Reserva creada con ID:", idReserva);
+      // Obtener el valor directamente desde el cuerpo de la respuesta
+      const idDetalleReserva = await lastIdResponse.text(); // El valor es directamente el número, no un JSON
 
-      // Asegurarse de que los detalles de la reserva estén disponibles
-      if (detallesReservaStore.detalles.length === 0) {
-        console.warn("No se encontraron detalles de reserva.");
-        return;
+      console.log("Respuesta recibida del servidor para IdDetalleReserva:", idDetalleReserva);
+
+      // Comprobar que el valor es válido
+      if (!idDetalleReserva || isNaN(parseInt(idDetalleReserva))) {
+        throw new Error("No se pudo obtener un IdDetalleReserva válido.");
       }
 
-      const reserva = reservaStore.reservas[0];  // Acceder al primer elemento del arreglo
-      const detalleReserva = detallesReservaStore.detalles[0]; // Tomamos el primer detalle
+      // Convertir el valor a número y verificar
+      const idDetalleReservaNum = parseInt(idDetalleReserva);
+      console.log("IdDetalleReserva convertido a número:", idDetalleReservaNum);
 
       // Crear línea de reserva con los IDs obtenidos
       const response = await fetch("https://localhost:7179/api/Lineas", {
@@ -55,10 +64,10 @@ export const useLineasStore = defineStore("lineas", {
           "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          IdReserva: reserva.idReserva,
-          IdDetalleReserva: detalleReserva.IdDetalleReserva, // Usamos el primer ID
+          IdReserva: idReserva,  // Usamos el ID de la reserva creado
+          IdDetalleReserva: [idDetalleReservaNum],  // Aquí aseguramos que sea un arreglo con el IdDetalleReserva numérico
           Descripcion: descripcion,
-          PrecioTotal: precioTotal,
+          Precio: precioTotal,
         }),
       });
 
@@ -70,14 +79,37 @@ export const useLineasStore = defineStore("lineas", {
       const data = await response.json();
       const IdLinea = data.IdLinea;
 
+      // Si la respuesta es exitosa, agrega la línea de reserva
       this.lineas.push({
         IdLinea,
         IdReserva: idReserva,
-        IdDetalleReserva: idDetalleReserva,
+        IdDetalleReserva: [idDetalleReservaNum],  // Aseguramos que sea un arreglo con el valor numérico
         Precio: precioTotal,
       });
 
       console.log("Línea de reserva creada con éxito.");
+
+      // Realizar el POST a las compras para completar la compra
+      const compraResponse = await fetch("https://localhost:7179/api/Lineas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          IdLinea,
+          IdReserva: idReserva,
+          Precio: precioTotal,
+        }),
+      });
+
+      if (!compraResponse.ok) {
+        const errorCompraData = await compraResponse.text();
+        throw new Error(`Error al realizar la compra: ${compraResponse.status} - ${errorCompraData}`);
+      }
+
+      const compraData = await compraResponse.json();
+      console.log("Compra realizada con éxito:", compraData);
     },
   },
 });

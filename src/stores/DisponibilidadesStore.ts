@@ -11,6 +11,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
 
   const disponibilidades = ref<any[]>([]);
 
+  // Función para obtener disponibilidades
   const fetchDisponibilidades = async () => {
     const idAsiento = asientoStore.asientoSeleccionado;
     console.log("ID del asiento antes del fetch:", idAsiento);
@@ -31,6 +32,33 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       console.log("Disponibilidades recibidas:", disponibilidades.value);
     } catch (error) {
       console.error("Error en fetchDisponibilidades:", error);
+    }
+  };
+
+  // Función para obtener el último detalle de reserva y su ID
+  const fetchLastDetalleReserva = async (token) => {
+    const urlLast = "https://localhost:7179/api/DetallesReservas/last";
+    try {
+      const responseLast = await fetch(urlLast, {
+        method: 'GET',
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+
+      if (!responseLast.ok) throw new Error(`Error al obtener el último detalle de reserva: ${responseLast.status}`);
+      
+      // Si la respuesta es un numero (104 por ejemplo), lo usamos directamente
+      const idDetalleReserva = await responseLast.json();
+      console.log("ID del último detalle de reserva:", idDetalleReserva);
+
+      if (!idDetalleReserva) {
+        console.warn("No se pudo obtener idDetalleReserva.");
+        return null;
+      }
+
+      return idDetalleReserva;
+    } catch (error) {
+      console.error("Error al obtener el último detalle de reserva:", error);
+      return null;
     }
   };
 
@@ -58,6 +86,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
     };
   
     try {
+      // Actualizar el estado de la disponibilidad
       const responsePut = await fetch(urlPut, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -67,8 +96,8 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       if (!responsePut.ok) throw new Error(`Error HTTP en PUT: ${responsePut.status}`);
       console.log("Estado cambiado correctamente.");
   
-      // Hacer POST a DetallesReservas
-      const idDetalleReserva = await detallesReservaStore.createDetallesReserva(token, [idAsiento]);
+      // Crear el detalle de reserva usando la función de obtener el último detalle
+      const idDetalleReserva = await fetchLastDetalleReserva(token); 
       if (idDetalleReserva) {
         console.log("Reserva creada con ID:", idDetalleReserva); // Para depurar
       } else {
@@ -80,11 +109,11 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
   
       if (idPuestoTrabajo !== null) {
         try {
-          // Post a Reservas
+          // Crear la reserva
           const idReserva = await reservasStore.createReserva(descripcion, idPuestoTrabajo);
           console.log("Reserva creada con ID:", idReserva);
   
-          // POST a Lineas con los datos obtenidos de otras stores
+          // Crear la línea de reserva
           const postLineas = await fetch("https://localhost:7179/api/Lineas", {
             method: "POST",
             headers: {
@@ -95,7 +124,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
               IdReserva: idReserva,
               IdDetalleReserva: idDetalleReserva,
               Descripcion: descripcion,
-              PrecioTotal: 11, // Precio total, ajusta según sea necesario
+              Precio: 11, // Precio total, ajusta según sea necesario
             }),
           });
   
@@ -120,11 +149,12 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
     }
   };
   
+  // Observamos cambios en el asiento seleccionado
   watch(
     () => asientoStore.asientoSeleccionado,
     (newIdAsiento) => {
       if (newIdAsiento) {
-        fetchDisponibilidades();
+        fetchDisponibilidades(); // Recargar disponibilidades cuando el asiento cambia
       }
     },
     { immediate: true }
