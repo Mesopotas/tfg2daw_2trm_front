@@ -1,6 +1,6 @@
 <template>
     <section class="legal__section legal__section--responsibility">
-      <h2 class="legal__title">Responsabilidad</h2>
+      <h2 class="legal__title">Privacidad</h2>
       <p class="legal__text">
         En "La Oficina", valoramos tu privacidad. Todos los datos personales que nos proporciones serán tratados con estricta confidencialidad y no serán compartidos con terceros sin tu consentimiento, salvo que sea requerido por ley.
     </p>
