@@ -3,10 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import HomeView from '../views/HomeView.vue';
-import MesasView from '../views/MesasView.vue';
 import SedesView from '../views/SedesView.vue';
 import UserInfoView from '../views/UserInfoView.vue';
 import SalasView from '../views/SalasView.vue';
+import SalaView from '../views/SalaView.vue';
+import DisponibilidadView from '../views/DisponibilidadView.vue';
+import InfoPedido from '../components/InfoPedido.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,11 +29,6 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/elegir-mesa',
-      name: 'elegir-mesa',
-      component: MesasView,
-    },
-    {
       path: '/sedes',
       name: 'sedes',
       component: SedesView,
@@ -45,6 +42,21 @@ const router = createRouter({
       path: '/salas',
       name: 'salas',
       component: SalasView,
+    },
+    {
+      path: '/sala',
+      name: 'sala',
+      component: SalaView,
+    },
+    {
+      path: '/disponibilidades',
+      name: 'disponibilidades',
+      component: DisponibilidadView,
+    },
+    {
+      path: '/info-pedido',
+      name: 'info-pedido',
+      component: InfoPedido,
     }
   ],
 });

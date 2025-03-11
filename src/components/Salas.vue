@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSalasStore } from '../stores/SalasStore';
 import { useSedesStore } from '../stores/SedesStore';
-import TargetSala from './TargetSala.vue';
+import TargetSala from './TargetSalas.vue';
 
 const salasStore = useSalasStore();
 const sedesStore = useSedesStore();

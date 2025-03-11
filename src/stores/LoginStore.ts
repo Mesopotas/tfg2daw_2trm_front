@@ -1,51 +1,48 @@
 import { defineStore } from "pinia";
+import { useUserStore } from "./UserStore"; // Asegúrate de importar el store de usuario
 
-// definicion de los datos usados en el proceso de Login y en relacion al backend
 interface LoginData {
   email: string;
   contrasenia: string;
 }
 
-/* Para usar el token en rutas protegidas con [Authorize]:
-headers: {
-      "Authorization": `Bearer ${token}`,
-} */
-
 export const LoginStore = defineStore("login", {
   state: () => ({
-    token: null as string | null, // inicializa el token en null (esperando recibir el token de la API)
-    errorMessage: null as string | null, // guarda el mensaje de error cuando ocurra
+    token: null as string | null,
+    errorMessage: null as string | null,
   }),
 
   actions: {
     async loginUsuario(loginData: LoginData) {
-        const endpointLoginPOST = "https://localhost:7179/Auth/Login"; // cambiar esta URL cuando se lance en AWS con IP fija y mas adelante con un dominio
+      const endpointLoginPOST = "https://localhost:7179/Auth/Login";
 
-        const res = await fetch(endpointLoginPOST, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(loginData),
-        });
+      const res = await fetch(endpointLoginPOST, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      });
 
-        if (res.ok) { 
-          // si la conexion con la API es exitosa (comprobar permisos en appsettings si falla, procolo (http o https, puerto, etc))
-          const textoToken = await res.text(); // no se usa res.json() porque el endpoint cuando recibe un post correcto devuelve el token en texto plano, sin formato JSON, si se usa res.json() dará error
+      if (res.ok) {
+        const textoToken = await res.text(); // Se obtiene el token como texto plano
 
-          this.token = textoToken; // asigna el valor del string devuelvo por el endpoint a la variable token del state
+        this.token = textoToken;
+        localStorage.setItem("authToken", textoToken);
 
-          // Guardar el token en localStorage, se usará para proximos fetch del entorno cliente para autorizar las peticiones
-          localStorage.setItem("authToken", textoToken);
-          // luego para los gets de la api se deberá añadir el token en el header de la peticion, de la forma -> const token = localStorage.getItem("authToken");, añadiendolo de la forma  headers: {"Authorization": `Bearer ${token}`,
-          this.errorMessage = null; // si todo ha funcionado, borra todo mensaje de error q haya podido haber
+        // Llamar a la acción del store de usuario para obtener los datos
+        const userStore = useUserStore();
+        await userStore.fetchUserData(textoToken); // Pasamos el token para obtener los datos del usuario
 
-          return true;
-        } else {
-          const errorLoginJWT = await res.text();
-          this.errorMessage = errorLoginJWT || ` ${res.statusText}`; // saca el  mensaje de error de la api (correo no existe o contraseña incorrecta) EJ: Error generating the token: Email no encontrado
+        this.errorMessage = null;
 
-          return false;
-        }
-     
+        // Verificar que los datos se guardaron correctamente
+        console.log("Datos del usuario:", userStore.user); // Console log de los datos del usuario
+
+        return true;
+      } else {
+        const errorLoginJWT = await res.text();
+        this.errorMessage = errorLoginJWT || ` ${res.statusText}`;
+        return false;
+      }
     },
   },
 });

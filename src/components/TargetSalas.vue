@@ -1,17 +1,31 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { useSalasStore } from '../stores/SalasStore';
 
-defineProps<{
+const salasStore = useSalasStore();
+
+const props = defineProps<{
   idSala?: number;
   nombre?: string;
   urL_Imagen?: string;
   capacidad?: number;
   bloqueado?: boolean;
 }>();
+
+// 🔹 Función para manejar el clic en la tarjeta
+const handleClick = () => {
+  if (!props.idSala) {
+    console.warn("⚠️ Intento de seleccionar una sala sin ID.");
+    return;
+  }
+
+  console.log("🖱 Click en la tarjeta de la sala:", props.idSala);
+  salasStore.selectSala(props.idSala);
+};
 </script>
 
 <template>
-  <RouterLink v-if="idSala" to="/puestos" class="tarjeta-link">
+  <RouterLink v-if="idSala" to="/sala" class="tarjeta-link" @click="handleClick">
     <div class="tarjeta">
       <img :src="urL_Imagen || 'https://via.placeholder.com/100'" alt="Imagen de la Sala" class="tarjeta__imagen">
       <div class="tarjeta__contenido">
@@ -21,6 +35,7 @@ defineProps<{
     </div>
   </RouterLink>
 </template>
+ 
 
 <style lang="scss" scoped>
 .tarjeta-link {
