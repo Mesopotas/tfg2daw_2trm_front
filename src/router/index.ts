@@ -8,6 +8,7 @@ import UserInfoView from '../views/UserInfoView.vue';
 import SalasView from '../views/SalasView.vue';
 import SalaView from '../views/SalaView.vue';
 import DisponibilidadView from '../views/DisponibilidadView.vue';
+import InfoPedido from '../components/InfoPedido.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -51,6 +52,11 @@ const router = createRouter({
       path: '/disponibilidades',
       name: 'disponibilidades',
       component: DisponibilidadView,
+    },
+    {
+      path: '/info-pedido',
+      name: 'info-pedido',
+      component: InfoPedido,
     }
   ],
 });

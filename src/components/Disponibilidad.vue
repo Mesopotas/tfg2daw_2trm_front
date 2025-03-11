@@ -19,6 +19,8 @@ const comprar = async () => {
   
   await disponibilidadesStore.cambiarEstadoDisponibilidad(fechaSeleccionada.value);
   alert('Compra realizada correctamente.');
+  router.push('/info-pedido');
+
   fechaSeleccionada.value = null; // reseteo
 };
 </script>
