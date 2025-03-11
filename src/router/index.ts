@@ -9,7 +9,10 @@ import SalasView from '../views/SalasView.vue';
 import SalaView from '../views/SalaView.vue';
 import DisponibilidadView from '../views/DisponibilidadView.vue';
 import InfoPedido from '../components/InfoPedido.vue';
-
+import CoockiesView from '../views/CoockiesView.vue';
+import ResponsabilidadView from '../views/ResponsabilidadView.vue';
+import PrivacidadView from '../views/PrivacidadView.vue';
+import DeclaracionView from '../views/DeclaracionView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -57,7 +60,28 @@ const router = createRouter({
       path: '/info-pedido',
       name: 'info-pedido',
       component: InfoPedido,
-    }
+    },
+    {
+      path: '/coockies',
+      name: 'coockies',
+      component: CoockiesView,
+    },
+    {
+      path: '/responsabilidad',
+      name: 'responsabilidad',
+      component: ResponsabilidadView,
+    },
+    {
+      path: '/privacidad',
+      name: 'privacidad',
+      component: PrivacidadView,
+    },
+    {
+      path: '/declaracion',
+      name: 'declaracion',
+      component: DeclaracionView,
+    },
   ],
 });
-export default router
+
+export default router;
