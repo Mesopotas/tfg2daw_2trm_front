@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useUserStore } from "./UserStore"; // Asegúrate de importar el store de usuario
+import { useUserStore } from "./UserStore"; 
 
 interface LoginData {
   email: string;
@@ -8,7 +8,7 @@ interface LoginData {
 
 export const LoginStore = defineStore("login", {
   state: () => ({
-    token: null as string | null,
+    token: localStorage.getItem("authToken") || null,
     errorMessage: null as string | null,
   }),
 
@@ -28,15 +28,12 @@ export const LoginStore = defineStore("login", {
         this.token = textoToken;
         localStorage.setItem("authToken", textoToken);
 
-        // Llamar a la acción del store de usuario para obtener los datos
         const userStore = useUserStore();
-        await userStore.fetchUserData(textoToken); // Pasamos el token para obtener los datos del usuario
+        await userStore.fetchUserData(textoToken);
 
         this.errorMessage = null;
 
-        // Verificar que los datos se guardaron correctamente
-        console.log("Datos del usuario:", userStore.user); // Console log de los datos del usuario
-
+        console.log("Datos del usuario tras login:", userStore.user);
         return true;
       } else {
         const errorLoginJWT = await res.text();
