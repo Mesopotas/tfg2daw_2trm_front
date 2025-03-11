@@ -16,9 +16,7 @@
           En La Oficina, creemos que el futuro del trabajo está en la colaboración, la creatividad y la tecnología. Somos un espacio de coworking diseñado especialmente para jóvenes profesionales del sector informático que buscan un entorno dinámico, flexible y lleno de oportunidades.
 
 Aquí, el código fluye como el café y las ideas se comparten en cada esquina. Nuestro espacio está pensado para ofrecerte comodidad, inspiración y comunidad, con áreas de trabajo equipadas, salas de reuniones, internet de alta velocidad y un ambiente ideal para programadores, diseñadores y emprendedores tecnológicos.
-
-Más que un lugar de trabajo, somos una comunidad. Unimos a freelancers, startups y equipos de desarrollo que buscan crecer, compartir conocimientos y colaborar en proyectos innovadores. En La Oficina, no solo trabajas: conectas, aprendes y evolucionas.
-        </v-card-text>
+ </v-card-text>
       </v-col>
     </v-row>
     <v-divider />

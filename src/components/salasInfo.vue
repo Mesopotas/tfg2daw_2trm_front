@@ -30,7 +30,6 @@
 <style lang="scss" scoped>
 .salasInfo {
   min-width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,7 +85,7 @@
 
   &__image {
     border-radius: 8px;
-    height: 200px;
+    height: 175px;
     object-fit: cover;
     margin-bottom: 16px;
   }
