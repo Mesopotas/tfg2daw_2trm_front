@@ -7,6 +7,7 @@ const errorMessage = ref(""); // si falla
 const successMessage = ref(""); // si funciona
 const currentPassword = ref(""); // Contraseña actual
 const newPassword = ref(""); // Nueva contraseña
+const emailHacerAdmin = ref(""); // Email del usuario a nombrar admin
 
 const fetchUserData = async () => {
   const token = localStorage.getItem("authToken");
@@ -67,10 +68,45 @@ const changePassword = async () => {
     }
 
     successMessage.value = "Contraseña cambiada con éxito";
-    currentPassword.value = ""; // limpiar info estableciendolo como null
+    currentPassword.value = ""; // limpiar info
     newPassword.value = "";
   } catch (error) {
     errorMessage.value = "Error al cambiar la contraseña. Inténtalo de nuevo.";
+    console.error(error);
+  }
+};
+
+// Función para nombrar admin
+const nombrarAdmin = async () => {
+  const token = localStorage.getItem("authToken");
+
+  if (!token) {
+    errorMessage.value = "No has iniciado sesión.";
+    return;
+  }
+
+  if (!emailHacerAdmin.value) {
+    errorMessage.value = "Por favor, ingresa un correo electrónico.";
+    return;
+  }
+
+  try {
+    const response = await fetch(`https://localhost:7179/api/Usuarios/cambiar-rol?email=${emailHacerAdmin.value}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Error al nombrar como admin");
+    }
+
+    successMessage.value = "Usuario nombrado como admin con éxito.";
+    emailHacerAdmin.value = ""; // limpiar el input
+  } catch (error) {
+    errorMessage.value = "Error al nombrar como admin. Inténtalo de nuevo.";
     console.error(error);
   }
 };
@@ -116,23 +152,32 @@ const changePassword = async () => {
       <div v-if="userStore.user?.idRol === 1" class="admin-actions">
         <h3>Opciones Administrativas</h3>
         <div class="actions">
-          <!-- se añadiran los metodos ahora que conecten con el endpoint-->
+          <button @click="nombrarAdmin">Nombrar admin</button>
+          
+          <div class="admin-email-input">
+            <label for="emailHacerAdmin">Email del Usuario:</label>
+            <input 
+              type="email" 
+              id="emailHacerAdmin" 
+              v-model="emailHacerAdmin" 
+              placeholder="Introduce el email"
+            />
+            <button @click="nombrarAdmin">Aplicar</button>
+          </div>
+
           <button>Añadir Sala</button>
-          <button >Borrar Sala</button>
-          <button >Añadir Administrador</button>
+          <button>Borrar Sala</button>
           <button>Añadir Sede</button>
-          <button >Añadir Tipo de Sala</button>
+          <button>Añadir Tipo de Sala</button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
-<style scoped lang="scss">.profile-container {
+<style scoped lang="scss">
 .profile-container {
   width: 100%;
-  height: calc(100vh - 176px);  // ancho completo
+  height: 100vh;
   padding: 16px;
   box-sizing: border-box;
   display: flex;
@@ -158,7 +203,6 @@ h1 {
   cursor: pointer;
 }
 
-
 .user-info {
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -166,7 +210,6 @@ h1 {
   background-color: #fafafa;
   margin-top: 20px;
   font-size: 1rem;
- 
 
   p {
     margin: 10px 0;
@@ -230,7 +273,7 @@ h1 {
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
-    
+
     button {
       padding: 10px 15px;
       background-color: #4CAF50;
@@ -276,6 +319,5 @@ h1 {
   .admin-actions .actions button {
     width: 150px;
   }
-}
 }
 </style>
