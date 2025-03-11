@@ -10,10 +10,10 @@ export default defineComponent({});
     <div class="footer__container">
       <div class="footer__container--content">
         <ul class="footer__list">
-          <li class="footer__item"><a href="#" class="footer__link">Cookie Policy</a></li>
-          <li class="footer__item"><a href="#" class="footer__link">Privacy and Legal</a></li>
-          <li class="footer__item"><a href="#" class="footer__link">Corporate Responsibility</a></li>
-          <li class="footer__item"><a href="#" class="footer__link">Modern Slavery Statement</a></li>
+          <router-link to="coockies"> <li class="footer__item"><a class="footer__link">Cookie Policy</a></li></router-link>
+          <router-link to="privacidad"> <li class="footer__item"><a href="#" class="footer__link">Privacy and Legal</a></li></router-link>
+          <router-link to="responsabilidad"> <li class="footer__item"><a href="#" class="footer__link">Corporate Responsibility</a></li></router-link>
+          <router-link to="declaracion"> <li class="footer__item"><a href="#" class="footer__link">Modern Slavery Statement</a></li></router-link>
         </ul>
       </div>
     </div>
@@ -49,6 +49,7 @@ export default defineComponent({});
 
   &__item {
     margin-bottom: 5px;
+    text-decoration: none;
   }
 
   &__link {
