@@ -1,7 +1,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import LogoCanvas from './LogoCanvas.vue';
 
-export default defineComponent({});
+export default defineComponent({
+  components: {
+    LogoCanvas,
+  },
+});
 </script>
 
 
@@ -10,7 +15,7 @@ export default defineComponent({});
 <template>
     <header class="nav-bar">
         <div class="nav-bar__container">
-            <router-link to="home"> <h1 class="nav-bar__logo">La Oficina</h1></router-link>
+            <router-link to="home"> <LogoCanvas/></router-link>
             <nav class="nav-bar__menu">
                 <a href="/home#oficina-id" class="nav-bar__link">Espacios</a>
                 <a href="/home#about-if" class="nav-bar__link">Quienes Somos</a>
