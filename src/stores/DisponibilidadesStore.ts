@@ -36,7 +36,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
   };
 
   // Función para obtener el último detalle de reserva y su ID
-  const fetchLastDetalleReserva = async (token) => {
+  const fetchLastDetalleReserva = async (token: string) => {
     const urlLast = "https://localhost:7179/api/DetallesReservas/last";
     try {
       const responseLast = await fetch(urlLast, {
@@ -62,6 +62,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
     }
   };
 
+  // Función para cambiar el estado de la disponibilidad
   const cambiarEstadoDisponibilidad = async (fechaSeleccionada: string, token: string) => {
     const idAsiento = asientoStore.asientoSeleccionado;
     if (!idAsiento) {
@@ -113,6 +114,28 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
           const idReserva = await reservasStore.createReserva(descripcion, idPuestoTrabajo);
           console.log("Reserva creada con ID:", idReserva);
   
+          // Crear el detalle de reserva
+          const responseDetalleReserva = await fetch("https://localhost:7179/api/DetallesReservas", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+              idDetalleReserva: 0, // El ID se autogenera
+              descripcion: descripcion,
+              idPuestoTrabajo: idPuestoTrabajo
+            })
+          });
+      
+          if (!responseDetalleReserva.ok) {
+            const errorData = await responseDetalleReserva.text();
+            throw new Error(`Error al crear el detalle de reserva: ${responseDetalleReserva.status} - ${errorData}`);
+          }
+      
+          const detalleReservaData = await responseDetalleReserva.json();
+          console.log("Detalle de reserva creado con ID:", detalleReservaData.idDetalleReserva);
+  
           // Crear la línea de reserva
           const postLineas = await fetch("https://localhost:7179/api/Lineas", {
             method: "POST",
@@ -122,7 +145,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
             },
             body: JSON.stringify({
               IdReserva: idReserva,
-              IdDetalleReserva: idDetalleReserva,
+              IdDetalleReserva: detalleReservaData.idDetalleReserva,
               Descripcion: descripcion,
               Precio: 11, // Precio total, ajusta según sea necesario
             }),
@@ -132,6 +155,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
             const errorData = await postLineas.text();
             throw new Error(`Error al crear la línea de reserva: ${postLineas.status} - ${errorData}`);
           }
+  
           const data = await postLineas.json();
           console.log("Línea de reserva creada con ID:", data.IdLinea);
   
@@ -148,7 +172,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       console.error("Error en cambiarEstadoDisponibilidad:", error);
     }
   };
-  
+
   // Observamos cambios en el asiento seleccionado
   watch(
     () => asientoStore.asientoSeleccionado,
