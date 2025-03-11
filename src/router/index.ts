@@ -7,6 +7,10 @@ import MesasView from '../views/MesasView.vue';
 import SedesView from '../views/SedesView.vue';
 import UserInfoView from '../views/UserInfoView.vue';
 import SalasView from '../views/SalasView.vue';
+import CoockiesView from '../views/CoockiesView.vue';
+import ResponsabilidadView from '../views/ResponsabilidadView.vue';
+import PrivacidadView from '../views/PrivacidadView.vue';
+import DeclaracionView from '../views/DeclaracionView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +49,26 @@ const router = createRouter({
       path: '/salas',
       name: 'salas',
       component: SalasView,
+    },
+    {
+      path: '/coockies',
+      name: 'coockies',
+      component: CoockiesView,
+    },
+    {
+      path: '/responsabilidad',
+      name: 'responsabilidad',
+      component: ResponsabilidadView,
+    },
+    {
+      path: '/privacidad',
+      name: 'privacidad',
+      component: PrivacidadView,
+    },
+    {
+      path: '/declaracion',
+      name: 'declaracion',
+      component: DeclaracionView,
     }
   ],
 });
