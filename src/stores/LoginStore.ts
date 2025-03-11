@@ -41,5 +41,17 @@ export const LoginStore = defineStore("login", {
         return false;
       }
     },
+
+    logout() {
+      // Elimina el token del localStorage
+      localStorage.removeItem("authToken");
+
+      // Limpia el token en la store
+      this.token = null;
+
+      // Limpia los datos del usuario
+      const userStore = useUserStore();
+      userStore.deleteUserData();
+    },
   },
 });

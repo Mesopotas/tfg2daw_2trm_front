@@ -11,7 +11,7 @@ export default {
   },
   created() {
     const userStore = useUserStore();
-    userStore.checkAndFetchUserData(); // cargar siempre la info del usuario, para evitar q este el token de JWT pero no la info en el store
+    userStore.cargarUsuarioFetch(); // cargar siempre la info del usuario, para evitar q este el token de JWT pero no la info en el store
   },
 };
 </script>

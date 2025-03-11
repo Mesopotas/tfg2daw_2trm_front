@@ -45,5 +45,9 @@ export const useUserStore = defineStore("user", {
         await this.fetchUserData(token);
       }
     },
+
+    deleteUserData() {
+      this.user = null; // toda info q haya se vuelve null
+    },
   },
 });

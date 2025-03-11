@@ -1,31 +1,38 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-export default defineComponent({});
+export default defineComponent({
+  methods: {
+    logout() {
+      localStorage.removeItem('authToken'); // borra el token
+
+    }
+  }
+});
 </script>
-
-
-
 
 <template>
     <header class="nav-bar">
         <div class="nav-bar__container">
-            <router-link to="home"> <h1 class="nav-bar__logo">La Oficina</h1></router-link>
+            <router-link to="home"> 
+                <h1 class="nav-bar__logo">La Oficina</h1>
+            </router-link>
             <nav class="nav-bar__menu">
                 <a href="#" class="nav-bar__link">Espacios</a>
                 <a href="#" class="nav-bar__link">Quienes Somos</a>
                 <a href="#" class="nav-bar__link">Tarifas</a>
             </nav>
-            <router-link to="login"> <div class="nav-bar__circle"></div></router-link>
-
+            <router-link to="login"> 
+                <div class="nav-bar__circle"></div>
+            </router-link>
+            <div @click="logout" class="nav-bar__logout-circle">
+                <img src="../assets/imgs/cerrar-sesion.png" alt="Cerrar sesión">
+            </div>
         </div>
     </header>
 </template>
 
-
-
 <style lang="scss" scoped>
-
 @use '../assets/styles/_variables.scss' as *;
 
 .nav-bar {
@@ -79,6 +86,22 @@ export default defineComponent({});
         height: 30px;
         background-color: #D3D3D3;
         border-radius: 50%;
+    }
+
+    &__logout-circle {
+        cursor: pointer;
+        margin-left: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     }
 
     @media (min-width: 768px) {
