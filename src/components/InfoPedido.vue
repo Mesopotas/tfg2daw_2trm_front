@@ -37,23 +37,22 @@
   </template>
   
   <script>
-
   import { useInfoPedidosStore } from '@/stores/InfoPedidoStore';
-  import { onMounted } from 'vue';
+  import { computed, onMounted } from 'vue';
   
   export default {
     setup() {
       const reservaDetallesStore = useInfoPedidosStore();
       const token = localStorage.getItem("authToken");
-
   
-      // Llamar a la función de fetchReservaDetalles cuando se monta el componente 
       onMounted(() => {
-        reservaDetallesStore.fetchReservaDetalles(token);
+        if (token) {
+          reservaDetallesStore.fetchReservaDetalles(token);
+        }
       });
   
       return {
-        reservaDetalles: reservaDetallesStore.reservaDetalles,
+        reservaDetalles: computed(() => reservaDetallesStore.reservaDetalles),
       };
     },
   };
@@ -83,7 +82,4 @@
   table th {
     background-color: #f4f4f4;
   }
-  
-
   </style>
-  

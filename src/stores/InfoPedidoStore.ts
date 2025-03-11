@@ -18,17 +18,16 @@ export const useInfoPedidosStore = defineStore('infoPedidos', () => {
     }>;
   } | null>(null);
 
-  // recoger los parametros en la URL
+  // manejar las querys de url
   const idReserva = computed(() => route.query.idReserva);
   const idDetalleReserva = computed(() => route.query.idDetalleReserva);
 
-  const fetchReservaDetalles = async (token: string) => {
-    if (!idReserva.value || !idDetalleReserva.value) {
-      console.error('Faltan los ID de reserva o detalle de reserva');
-      return;
-    }
+  const fetchReservaDetalles = async () => {
+    if (!idReserva.value || !idDetalleReserva.value) return;
 
+    const token = localStorage.getItem("authToken");
     const url = `https://localhost:7179/api/Reservas/detalles/${idReserva.value}/${idDetalleReserva.value}`;
+
     try {
       const response = await fetch(url, {
         method: 'GET',

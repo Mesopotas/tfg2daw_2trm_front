@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import { useAsientoStore } from '@/stores/AsientosStore';
 import { useDisponibilidadesStore } from '@/stores/DisponibilidadesStore';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const asientoStore = useAsientoStore();
 const disponibilidadesStore = useDisponibilidadesStore();
 const fechaSeleccionada = ref(null);
@@ -19,7 +21,7 @@ const comprar = async () => {
   
   await disponibilidadesStore.cambiarEstadoDisponibilidad(fechaSeleccionada.value);
   alert('Compra realizada correctamente.');
-  router.push('/info-pedido');
+  router.push(`/info-pedido?idReserva=${asientoStore.asientoSeleccionado}?idDetalleReserva${fechaSeleccionada.value}`);
 
   fechaSeleccionada.value = null; // reseteo
 };
