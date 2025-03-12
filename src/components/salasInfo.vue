@@ -85,7 +85,7 @@
 
   &__image {
     border-radius: 8px;
-    height: 175px;
+    width: 270px;
     object-fit: cover;
     margin-bottom: 16px;
   }
