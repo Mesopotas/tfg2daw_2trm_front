@@ -55,7 +55,7 @@ const comprar = async () => {
             :class="{ seleccionado: fechaSeleccionada === disponibilidad.fecha, clickeable: disponibilidad.estado }" 
             @click="seleccionarFecha(disponibilidad.fecha, disponibilidad.estado)"
           >
-            <td>{{ disponibilidad.fecha }}</td>
+            <td>{{ disponibilidad.fecha }}/03/2025</td>
             <td :class="{ disponible: disponibilidad.estado, ocupado: !disponibilidad.estado }">
               {{ disponibilidad.estado ? 'Disponible' : 'No disponible' }}
             </td>

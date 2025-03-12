@@ -319,6 +319,8 @@ h3 {
   padding: 10px 15px;
   margin-bottom: 20px;
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
   
   p {
     color: #cc0000;
