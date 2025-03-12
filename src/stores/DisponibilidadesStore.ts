@@ -113,9 +113,13 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
           const data = await postLineas.json();
 
           router.push({
-            name: 'info-pedido',
-            query: { idReserva: idReserva, idDetalleReserva: detalleReservaData.idDetalleReserva }
+            path: '/info-pedido',
+            query: {
+              idReserva: idReserva, 
+              idDetalleReserva: detalleReservaData.idDetalleReserva
+            }
           });
+          
 
         } catch (errorReserva) {
           console.error("Error al crear la reserva:", errorReserva);
