@@ -6,31 +6,37 @@ export default defineComponent({
   components: {
     LogoCanvas,
   },
+  methods: {
+    logout() {
+      localStorage.removeItem('authToken'); // borra el token
+    }
+  }
 });
 </script>
-
-
-
 
 <template>
     <header class="nav-bar">
         <div class="nav-bar__container">
-            <router-link to="home"> <LogoCanvas/></router-link>
+            <router-link to="home"> 
+                <LogoCanvas />
+            </router-link>
             <nav class="nav-bar__menu">
                 <a href="/home#oficina-id" class="nav-bar__link">Espacios</a>
                 <a href="/home#about-if" class="nav-bar__link">Quienes Somos</a>
-                <a href="/home#salaInfo-id" class="nav-bar__link">salasInfo</a>
+                <a href="/home#salaInfo-id" class="nav-bar__link">Salas Info</a>
             </nav>
-            <router-link to="login"> <div class="nav-bar__circle"></div></router-link>
-
+            <router-link to="login"> 
+                <div class="nav-bar__circle"></div>
+            </router-link>
+            <!-- Elemento para hacer logout -->
+            <div @click="logout" class="nav-bar__logout-circle">
+                <img src="../assets/imgs/cerrar-sesion.png" alt="Cerrar sesión">
+            </div>
         </div>
     </header>
 </template>
 
-
-
 <style lang="scss" scoped>
-
 @use '../assets/styles/_variables.scss' as *;
 
 .nav-bar {
@@ -49,7 +55,7 @@ export default defineComponent({
         position: relative;
     }
 
-    a{
+    a {
         position: relative;
     }
 
@@ -86,6 +92,22 @@ export default defineComponent({
         border-radius: 50%;
     }
 
+    &__logout-circle {
+        cursor: pointer;
+        margin-left: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
     @media (min-width: 768px) {
         padding: 20px 20px;
 
@@ -104,33 +126,32 @@ export default defineComponent({
             height: 35px;
         }
     }
-}
 
-@media (min-width: 1024px) {
-    .nav-bar {
-    padding: 20px 20px 20px 20px;
+    @media (min-width: 1024px) {
+        .nav-bar {
+            padding: 20px 20px 20px 20px;
 
-    &__container {
-        width: 90%;
+            &__container {
+                width: 90%;
+            }
+
+            &__logo {
+                font-size: 20px;
+            }
+
+            &__menu {
+                gap: 40px;
+            }
+
+            &__link {
+                font-size: 18px;
+            }
+
+            &__circle {
+                width: 40px;
+                height: 40px;
+            }
+        }
     }
-
-    &__logo {
-        font-size: 20px;
-    }
-
-    &__menu {
-        gap: 40px;
-    }
-
-    &__link {
-        font-size: 18px;
-    }
-
-    &__circle {
-        width: 40px;
-        height: 40px;
-    }
-}
 }
 </style>
-

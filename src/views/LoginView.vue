@@ -14,21 +14,29 @@ const login = async (event: Event) => {
   event.preventDefault(); // Evita que el formulario haga q se recargue la pagina
   mensajeError.value = "";
 
-  if (usuario.value && password.value)/* prevenir que no falten campos por rellenar */ {
+  if (usuario.value && password.value) { // prevenir que no falten campos por rellenar 
     const loginData = { email: usuario.value, contrasenia: password.value }; // crea el objeto q se enviará en el POST para luego recibir el token
-          await loginStore.loginUsuario(loginData);
+    
+    try {
+      await loginStore.loginUsuario(loginData);
       
-      if (loginStore.token) /* si recibe el token con exito */{
-        router.push("/#exito");  // cambiar a la ruta de la pagina privada de usuario con su data
+      if (loginStore.token) { // si recibe el token con exito 
+        router.push("/userinfo");  // Cambiar a la ruta de la página privada de usuario con su data
       } else {
         mensajeError.value = loginStore.errorMessage || "Credenciales incorrectas";
       }
+    } catch (error) {
+     
+        mensajeError.value = "Ha ocurrido un error, intenta nuevamente.";
+      
+    }
    
-  } else /* si uno de los 2 campos o ambos no tienen valor */ {
+  } else { // si uno de los 2 campos o ambos no tienen valor
     mensajeError.value = "Usuario y contraseña son requeridos";
   }
 };
 </script>
+
 
 <template>
   <div class="login">

@@ -12,7 +12,7 @@ interface User {
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    user: null as User | null, // Aquí almacenamos la información del usuario
+    user: null as User | null, // Almacena los datos del usuario
   }),
 
   actions: {
@@ -23,19 +23,31 @@ export const useUserStore = defineStore("user", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Usamos el token para autenticar la solicitud
+          Authorization: `Bearer ${token}`, // Se usa el token guardado
         },
       });
 
       if (res.ok) {
         const userData: User = await res.json();
-        this.user = userData; // Guardamos la información del usuario en el store
+        this.user = userData;
 
-        // Hacer un console.log para verificar que los datos se guardan correctamente
         console.log("Datos del usuario obtenidos:", this.user);
       } else {
-        throw new Error("Error al obtener los datos del usuario");
+        console.error("Error al obtener los datos del usuario");
+        this.user = null;
       }
+    },
+
+    async cargarUsuarioFetch() {
+      const token = localStorage.getItem("authToken");
+      if (token) // si hay token, guarda la info del endpoint, que dará la info del usuario al que pertenezca el JWT q tengamos en el localstorage habiendo iniciado sesión
+         {
+        await this.fetchUserData(token);
+      }
+    },
+
+    deleteUserData() {
+      this.user = null; // toda info q haya se vuelve null
     },
   },
 });
