@@ -200,12 +200,10 @@ const addSede = async () => {
     </div>
 
     <div v-else class="user-info">
-      <p><strong>ID Usuario:</strong> {{ userStore.user?.idUsuario }}</p>
       <p><strong>Nombre:</strong> {{ userStore.user?.nombre }}</p>
       <p><strong>Apellidos:</strong> {{ userStore.user?.apellidos }}</p>
       <p><strong>Email:</strong> {{ userStore.user?.email }}</p>
       <p><strong>Fecha Registro:</strong> {{ darFormatoFecha(userStore.user?.fechaRegistro ?? '') }}</p>
-      <p><strong>Rol:</strong> {{ userStore.user?.idRol }}</p>
 
       <div class="change-password">
         <h3>Cambiar Contraseña</h3>
