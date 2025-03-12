@@ -74,6 +74,7 @@ const comprar = async () => {
 
 <style scoped>
 .disponibilidad {
+  min-height: calc(100vh - 123px - 98px);
   padding: 20px;
   text-align: center;
 }
