@@ -60,6 +60,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
+  background-color: rgb(243, 231, 220);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,15 +87,18 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
 
-  th, td {
+
+   td {
     border: 1px solid #ddd;
+    background-color: white;
     padding: 10px;
     text-align: center;
   }
 
   th {
-    background-color: #f4f4f4;
+    background-color: #000000;
     font-weight: bold;
+    color: white;
   }
 
   td {

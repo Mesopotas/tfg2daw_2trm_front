@@ -10,6 +10,7 @@ import InfoPedido from '@/components/InfoPedido.vue';
 
 <style scoped>
 .disponibilidad-view {
+  background-color: rgb(243, 231, 220);
   display: flex;
   justify-content: center;
   align-items: center;
