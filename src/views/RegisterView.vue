@@ -34,7 +34,7 @@ const registrarUsuario = async (event: Event) => {
     if (registroExitoso) {
       mensajeExito.value = registerStore.successMessage || "Registro añadido correctamente";
       setTimeout(() => {
-        router.push("/#exito"); // contador de 3,5 segundos para dar tiempo a leer el mensaje sin problemas, luego deberia redirigir a la zona privada
+        router.push("/userinfo"); // contador de 3,5 segundos para dar tiempo a leer el mensaje sin problemas, luego deberia redirigir a la zona privada
       }, 3500);
     } else {
       mensajeError.value = registerStore.errorMessage || "Error en el registro. Intentalo de nuevo.";
