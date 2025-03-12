@@ -66,7 +66,7 @@ const changePassword = async () => {
   }
 
   try {
-    const response = await fetch("https://localhost:7179/Auth/ChangePassword", {
+    const response = await fetch("https://laoficinaapi.retocsv.es/Auth/ChangePassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -111,8 +111,8 @@ const cambiarEstadoAdmin = async () => {
   }
 
   const url = adminAction.value === "nombrar"
-    ? `https://localhost:7179/api/Usuarios/cambiar-rol?email=${emailHacerAdmin.value}`
-    : `https://localhost:7179/api/Usuarios/quitar-admin?email=${emailHacerAdmin.value}`;
+    ? `https://laoficinaapi.retocsv.es/api/Usuarios/cambiar-rol?email=${emailHacerAdmin.value}`
+    : `https://laoficinaapi.retocsv.es/api/Usuarios/quitar-admin?email=${emailHacerAdmin.value}`;
 
   try {
     const response = await fetch(url, {
@@ -156,7 +156,7 @@ const addSede = async () => {
   }
 
   try {
-    const response = await fetch("https://localhost:7179/api/Sedes", {
+    const response = await fetch("https://laoficinaapi.retocsv.es/api/Sedes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

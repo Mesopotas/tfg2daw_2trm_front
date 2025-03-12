@@ -18,7 +18,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
       return;
     }
 
-    const url = `https://localhost:7179/api/Disponibilidades/search?idPuestoTrabajo=${idAsiento}`;
+    const url = `https://laoficinaapi.retocsv.es/api/Disponibilidades/search?idPuestoTrabajo=${idAsiento}`;
     try {
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
@@ -29,7 +29,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
   };
 
   const fetchLastDetalleReserva = async (token: string) => {
-    const urlLast = "https://localhost:7179/api/DetallesReservas/last";
+    const urlLast = "https://laoficinaapi.retocsv.es/api/DetallesReservas/last";
     try {
       const responseLast = await fetch(urlLast, {
         method: 'GET',
@@ -52,7 +52,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
     const disponibilidad = disponibilidades.value.find(d => d.fecha === fechaSeleccionada);
     if (!disponibilidad) return;
 
-    const urlPut = `https://localhost:7179/api/Disponibilidades/${disponibilidad.idDisponibilidad}`;
+    const urlPut = `https://laoficinaapi.retocsv.es/api/Disponibilidades/${disponibilidad.idDisponibilidad}`;
     const bodyPut = { 
       idDisponibilidad: disponibilidad.idDisponibilidad,
       fecha: disponibilidad.fecha,
@@ -79,7 +79,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
         try {
           const idReserva = await reservasStore.createReserva(descripcion, idPuestoTrabajo);
   
-          const responseDetalleReserva = await fetch("https://localhost:7179/api/DetallesReservas", {
+          const responseDetalleReserva = await fetch("https://laoficinaapi.retocsv.es/api/DetallesReservas", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export const useDisponibilidadesStore = defineStore('disponibilidades', () => {
           if (!responseDetalleReserva.ok) throw new Error(`Error al crear el detalle de reserva: ${responseDetalleReserva.status}`);
           const detalleReservaData = await responseDetalleReserva.json();
   
-          const postLineas = await fetch("https://localhost:7179/api/Lineas", {
+          const postLineas = await fetch("https://laoficinaapi.retocsv.es/api/Lineas", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

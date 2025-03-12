@@ -17,7 +17,7 @@ export const useUserStore = defineStore("user", {
 
   actions: {
     async fetchUserData(token: string) {
-      const endpoint = "https://localhost:7179/api/Usuarios/byIdConJWT";
+      const endpoint = "https://laoficinaapi.retocsv.es/api/Usuarios/byIdConJWT";
 
       const res = await fetch(endpoint, {
         method: "GET",

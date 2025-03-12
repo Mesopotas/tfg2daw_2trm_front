@@ -25,7 +25,7 @@ export const useDetallesReservaStore = defineStore("detallesReserva", {
           descripcion, // El backend completa el resto de los datos
         };
 
-        const response = await fetch("https://localhost:7179/api/DetallesReservas", {
+        const response = await fetch("https://laoficinaapi.retocsv.es/api/DetallesReservas", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -24,7 +24,7 @@ export const useSedesStore = defineStore('sedes', () => {
   //Obtener todas las sedes, un fetch normal
 
   const fetchSedes = async () => {
-    const response = await fetch('https://localhost:7179/api/Sedes');
+    const response = await fetch('https://laoficinaapi.retocsv.es/api/Sedes');
     sedes.value = await response.json();
   };
 
