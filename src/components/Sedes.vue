@@ -51,7 +51,7 @@ onMounted(() => {
 
 <style scoped>
 .sedes {
-  height: calc(100vh - 123px - 98px);
+  padding-bottom: 10px;
   text-align: center;
 
   @media (min-width: 768px) {
