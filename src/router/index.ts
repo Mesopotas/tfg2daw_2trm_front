@@ -13,6 +13,7 @@ import CoockiesView from '../views/CoockiesView.vue';
 import ResponsabilidadView from '../views/ResponsabilidadView.vue';
 import PrivacidadView from '../views/PrivacidadView.vue';
 import DeclaracionView from '../views/DeclaracionView.vue';
+import NoEncontrado from '../components/NoEncontrado.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -81,6 +82,11 @@ const router = createRouter({
       name: 'declaracion',
       component: DeclaracionView,
     },
+    {
+      path: '/:pathMatch(.*)*', // si la ruta no es ninguna de las definidar aqui, se activará este componente
+      name: 'NotFound',
+      component: NoEncontrado,
+    }
   ],
 });
 
