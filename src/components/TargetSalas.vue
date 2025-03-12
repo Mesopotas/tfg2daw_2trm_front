@@ -27,7 +27,6 @@ const handleClick = () => {
 <template>
   <RouterLink v-if="idSala" to="/sala" class="tarjeta-link" @click="handleClick">
     <div class="tarjeta">
-      <img :src="urL_Imagen || 'https://via.placeholder.com/100'" alt="Imagen de la Sala" class="tarjeta__imagen">
       <div class="tarjeta__contenido">
         <h3>{{ nombre }}</h3>
         <p><strong>Capacidad:</strong> {{ capacidad }}</p>
