@@ -75,7 +75,6 @@ export default defineComponent({
         align-items: center;
         width: 100%;
         gap: 10px;
-        padding-left: 65px;
     }
 
     &__link {
