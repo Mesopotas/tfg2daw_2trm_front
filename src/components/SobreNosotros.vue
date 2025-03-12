@@ -25,7 +25,7 @@ Aquí, el código fluye como el café y las ideas se comparten en cada esquina. 
 
 <style lang="scss" scoped>
 .about {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   min-width: 100%;
