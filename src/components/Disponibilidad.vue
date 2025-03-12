@@ -9,8 +9,10 @@ const asientoStore = useAsientoStore();
 const disponibilidadesStore = useDisponibilidadesStore();
 const fechaSeleccionada = ref(null);
 
-const seleccionarFecha = (fecha) => {
-  fechaSeleccionada.value = fecha;
+const seleccionarFecha = (fecha, estado) => {
+  if (estado) { /* verificar si esta disponible la fecha, es decir si estado  = true*/
+    fechaSeleccionada.value = fecha;
+  }
 };
 
 const comprar = async () => {
@@ -21,7 +23,7 @@ const comprar = async () => {
   
   await disponibilidadesStore.cambiarEstadoDisponibilidad(fechaSeleccionada.value);
   alert('Compra realizada correctamente.');
-  router.push(`/info-pedido?idReserva=${asientoStore.asientoSeleccionado}?idDetalleReserva${fechaSeleccionada.value}`);
+  router.push(`/info-pedido?idReserva=${asientoStore.asientoSeleccionado}&idDetalleReserva=${fechaSeleccionada.value}`);
 
   fechaSeleccionada.value = null; // reseteo
 };
@@ -50,8 +52,8 @@ const comprar = async () => {
           <tr 
             v-for="disponibilidad in disponibilidadesStore.disponibilidades" 
             :key="disponibilidad.idDisponibilidad"
-            :class="{ seleccionado: fechaSeleccionada === disponibilidad.fecha }"
-            @click="seleccionarFecha(disponibilidad.fecha)"
+            :class="{ seleccionado: fechaSeleccionada === disponibilidad.fecha, clickeable: disponibilidad.estado }" 
+            @click="seleccionarFecha(disponibilidad.fecha, disponibilidad.estado)"
           >
             <td>{{ disponibilidad.fecha }}</td>
             <td :class="{ disponible: disponibilidad.estado, ocupado: !disponibilidad.estado }">
@@ -95,7 +97,6 @@ const comprar = async () => {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: center;
-  cursor: pointer;
 }
 
 .tabla-disponibilidad th {
@@ -113,6 +114,15 @@ const comprar = async () => {
 
 .seleccionado {
   background-color: yellow;
+}
+
+.clickeable {
+  cursor: pointer;
+}
+
+.tabla-disponibilidad tr:not(.clickeable) {  /* si no es clickable, no pasará nada al pasar el cursor por encima, tb se le baja un poco opacidad */
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 .boton-comprar {
