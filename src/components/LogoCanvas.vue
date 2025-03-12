@@ -124,6 +124,13 @@
   };
   </script>
   
-  <style scoped>
-  </style>
+
+
+ <style scoped>
+
+#logoCanvas{
+  height: 50px;
+}
+
+</style>
   
