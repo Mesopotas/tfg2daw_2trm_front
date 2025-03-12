@@ -25,8 +25,8 @@ export default defineComponent({
                 <a href="/home#about-if" class="nav-bar__link">Quienes Somos</a>
                 <a href="/home#salaInfo-id" class="nav-bar__link">Salas Info</a>
             </nav>
-            <router-link to="login"> 
-                <div class="nav-bar__circle"></div>
+            <router-link to="userinfo"> 
+                <img class="nav-bar__circle" src="../assets/imgs/user.png"></img>
             </router-link>
             <!-- Elemento para hacer logout -->
             <div @click="logout" class="nav-bar__logout-circle">
@@ -57,6 +57,7 @@ export default defineComponent({
 
     a {
         position: relative;
+        display: flex
     }
 
     &__logo {
@@ -85,9 +86,8 @@ export default defineComponent({
 
     &__circle {
         right: 10px;
-        width: 30px;
-        height: 30px;
-        background-color: #D3D3D3;
+        width: 40px;
+        height: auto;
         border-radius: 50%;
     }
 
