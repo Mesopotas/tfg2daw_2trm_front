@@ -14,6 +14,7 @@ import ResponsabilidadView from '../views/ResponsabilidadView.vue';
 import PrivacidadView from '../views/PrivacidadView.vue';
 import DeclaracionView from '../views/DeclaracionView.vue';
 import NoEncontrado from '../components/NoEncontrado.vue';
+import AutoriaNicolasView from '../views/AutoriaNicolasView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -81,6 +82,11 @@ const router = createRouter({
       path: '/declaracion',
       name: 'declaracion',
       component: DeclaracionView,
+    },    
+    {
+      path: '/autoriaNicolas',
+      name: 'autoriaNicolas',
+      component: AutoriaNicolasView,
     },
     {
       path: '/:pathMatch(.*)*', // si la ruta no es ninguna de las definidar aqui, se activará este componente
