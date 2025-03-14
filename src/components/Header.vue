@@ -21,9 +21,9 @@ export default defineComponent({
                 <LogoCanvas />
             </router-link>
             <nav class="nav-bar__menu">
-                <a href="/home#oficina-id" class="nav-bar__link">Espacios</a>
-                <a href="/home#about-if" class="nav-bar__link">Quienes Somos</a>
-                <a href="/home#salaInfo-id" class="nav-bar__link">Salas Info</a>
+                <a href="/home#oficina-id" class="nav-bar__link">Santos</a>
+                <a href="/home#about-if" class="nav-bar__link">Porfa</a>
+                <a href="/home#salaInfo-id" class="nav-bar__link">Apruebame</a>
             </nav>
             <router-link to="userinfo"> 
                 <img class="nav-bar__circle" src="../assets/imgs/user.png"></img>
