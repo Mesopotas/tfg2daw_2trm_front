@@ -1,9 +1,8 @@
 <template>
     <section class="legal__section legal__section--responsibility">
-      <h2 class="legal__title">Coockies</h2>
+      <h2 class="legal__title">Examen Santos</h2>
       <p class="legal__text">
-        Utilizamos cookies para mejorar la experiencia de los usuarios en nuestro sitio web. Las cookies se utilizan para recordar tus preferencias y facilitar la navegación. Si no deseas aceptar las cookies, puedes configurar tu navegador para desactivarlas.
-        
+        Jorge Blasco Aso - 2SW
     </p>
     </section>
   </template>
