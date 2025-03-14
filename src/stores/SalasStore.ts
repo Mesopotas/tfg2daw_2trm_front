@@ -24,7 +24,7 @@ export const useSalasStore = defineStore('salas', () => {
       return;
     }
 
-    const url = `https://laoficinaapi.retocsv.es/api/Salas/search?idsede=${idSede}`;
+    const url = `https:/localhost:7179/api/Salas/search?idsede=${idSede}`;
     console.log("🌍 Intentando obtener salas desde:", url);
 
     try {

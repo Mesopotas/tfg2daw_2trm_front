@@ -26,7 +26,7 @@ export const useInfoPedidosStore = defineStore('infoPedidos', () => {
     if (!idReserva.value || !idDetalleReserva.value) return;
 
     const token = localStorage.getItem("authToken");
-    const url = `https://laoficinaapi.retocsv.es/api/Reservas/detalles/${idReserva.value}/${idDetalleReserva.value}`;
+    const url = `https:/localhost:7179/api/Reservas/detalles/${idReserva.value}/${idDetalleReserva.value}`;
 
     try {
       const response = await fetch(url, {

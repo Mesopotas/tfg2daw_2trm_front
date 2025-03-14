@@ -66,7 +66,7 @@ const changePassword = async () => {
   }
 
   try {
-    const response = await fetch("https://laoficinaapi.retocsv.es/Auth/ChangePassword", {
+    const response = await fetch("https:/localhost:7179/Auth/ChangePassword", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -111,8 +111,8 @@ const cambiarEstadoAdmin = async () => {
   }
 
   const url = adminAction.value === "nombrar"
-    ? `https://laoficinaapi.retocsv.es/api/Usuarios/cambiar-rol?email=${emailHacerAdmin.value}`
-    : `https://laoficinaapi.retocsv.es/api/Usuarios/quitar-admin?email=${emailHacerAdmin.value}`;
+    ? `https:/localhost:7179/api/Usuarios/cambiar-rol?email=${emailHacerAdmin.value}`
+    : `https:/localhost:7179/api/Usuarios/quitar-admin?email=${emailHacerAdmin.value}`;
 
   try {
     const response = await fetch(url, {
@@ -156,7 +156,7 @@ const addSede = async () => {
   }
 
   try {
-    const response = await fetch("https://laoficinaapi.retocsv.es/api/Sedes", {
+    const response = await fetch("https:/localhost:7179/api/Sedes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -204,6 +204,7 @@ const addSede = async () => {
       <p><strong>Apellidos:</strong> {{ userStore.user?.apellidos }}</p>
       <p><strong>Email:</strong> {{ userStore.user?.email }}</p>
       <p><strong>Fecha Registro:</strong> {{ darFormatoFecha(userStore.user?.fechaRegistro ?? '') }}</p>
+      <router-link to="/favoritos-cliente" class="link">pulsa aquí para ver tus lista de favoritos</router-link>
 
       <div class="change-password">
         <h3>Cambiar Contraseña</h3>

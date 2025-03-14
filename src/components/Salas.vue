@@ -2,9 +2,11 @@
 import { useSalasStore } from '../stores/SalasStore';
 import { useSedesStore } from '../stores/SedesStore';
 import TargetSala from './TargetSalas.vue';
+import { useFavoritosStore } from '../stores/FavoritosStore';
 
 const salasStore = useSalasStore();
 const sedesStore = useSedesStore();
+const favoritosStore = useFavoritosStore(); // añadir favoritos
 
 // Ejecutar fetchSalas automáticamente cuando cambie selectedSedeId asi cada vez que vayamos atra y demos en otro cambiara
 salasStore.fetchSalas(sedesStore.selectedSedeId);
@@ -22,6 +24,16 @@ salasStore.fetchSalas(sedesStore.selectedSedeId);
         :key="sala.idSala"
         v-bind="sala"
       />
+      <!-- Botón de añadir a favoritos -->
+      <button 
+        v-for="sala in salasStore.salas" 
+        :key="'fav-' + sala.idSala" 
+        @click="favoritosStore.addFavorito(sala.idSala)" 
+        class="favorito-btn">
+        Añadir a Favoritos
+        <br>
+        <span class="nombre-sala">Sala: {{ sala.nombre }}</span>
+      </button>
     </div>
 
     <p v-else>Cargando salas...</p>
@@ -50,5 +62,26 @@ salasStore.fetchSalas(sedesStore.selectedSedeId);
   justify-content: center;
   gap: 20px;
   padding-top: 20px;
+}
+
+.favorito-btn {
+  background-color: yellow;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  width: 150px;
+}
+
+.favorito-btn:hover {
+  background-color: yellow;
+}
+
+.nombre-sala {
+  font-size: 14px;
+  color: black;
+  margin-top: 8px;
+  display: block;
 }
 </style>

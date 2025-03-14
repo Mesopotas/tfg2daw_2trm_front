@@ -37,7 +37,7 @@ export const useReservasStore = defineStore("reservas", {
 
       console.log("Enviando datos de reserva:", requestBody); //depuración
 
-      const response = await fetch("https://laoficinaapi.retocsv.es/api/Reservas", {
+      const response = await fetch("https:/localhost:7179/api/Reservas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
