@@ -2,7 +2,7 @@ name: Docker Image CI/CD frontend Coworking
 
 on:
   push:
-    branches: [ main, develop, nicolas-autoria ]
+    branches: [ main, develop, autoria-santos ]
   pull_request:
     branches: [ main, develop]
 env:
